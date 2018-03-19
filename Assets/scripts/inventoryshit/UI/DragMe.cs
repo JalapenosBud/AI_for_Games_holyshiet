@@ -9,15 +9,20 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 {
 
     public bool dragOnSurface = true;
-
+    public bool isDragging = false;
     private CanvasGroup canvasGroup;
     private GameObject draggedObj;
     private RectTransform draggingPlane;
+    private Canvas canvas;
 
+    private int tempID;
 
     private void Start()
     {
         //print("calling from dragme");
+        canvasGroup = GetComponent<CanvasGroup>();
+        
+
     }
 
     public void DetectCanvas(PointerEventData data)
@@ -29,7 +34,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
     public void OnBeginDrag(PointerEventData eventData)
     {
         //make a canvas variable where we get the canvas component in the mouseclick
-        var canvas = eventData.pointerPress.GetComponent<Canvas>();
+        canvas = eventData.pointerPress.GetComponent<Canvas>();
         //set the object to be dragged to a new GO
         print(canvas);
         //TODO:
@@ -38,11 +43,12 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         draggedObj = new GameObject("img");
 
         //set the dragged objs parent to the canvas transform
-        draggedObj.transform.SetParent(canvas.transform, false);
+        draggedObj.transform.SetParent(canvas.transform.GetChild(0), false);
 
         //put it in the bottom of the hieriarchy so it appears infront of other elements
         draggedObj.transform.SetAsLastSibling();
-        
+        draggedObj.layer = 8;
+        print("layer is: " + draggedObj.layer);
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
         var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
@@ -72,7 +78,9 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         }
 
         //method to set the data equal to where we started the drag from
-        SetDraggedPosition(eventData);
+        //SetDraggedPosition(eventData);
+        //PutDragAtMouse();
+        isDragging = true;
 
         
     }
@@ -81,7 +89,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
     {
         if (draggedObj != null)
         {
-            SetDraggedPosition(eventData);
+            PutDragAtMouse(eventData);
         }
 
     }
@@ -90,15 +98,20 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
     {
         if (draggedObj != null)
         {
-            //attaches new item
-            //ItemAssignController.MethodAttachItem();
-            //removes old
-            //ItemAssignController.MethodRemoveItem();
+
+
             Destroy(draggedObj);
         }
+        
     }
 
-    private void SetDraggedPosition(PointerEventData data)
+    void PutDragAtMouse(PointerEventData data)
+    {
+        var pos = (data.position - (Vector2)canvas.GetComponent<RectTransform>().localPosition);
+        draggedObj.GetComponent<RectTransform>().localPosition = pos;
+    }
+
+   /* private void SetDraggedPosition(PointerEventData data)
     {
         //if dragging on surface (yes) and the mouse entered an objects fov
         //and it belongs to a recttransform
@@ -116,7 +129,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             rt.position = glmousepos;
             rt.rotation = draggingPlane.rotation;
         }
-    }
+    }*/
 
     public void OnPointerClick(PointerEventData eventData)
     {

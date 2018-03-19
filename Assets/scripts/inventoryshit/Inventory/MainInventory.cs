@@ -20,6 +20,15 @@ public class MainInventory  : MonoBehaviour{
         ManipulateSlots();
         //TODO: fixme; for now: dummy code 
         slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
+        slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+    }
+
+    public void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Break();
+        }
     }
 
 

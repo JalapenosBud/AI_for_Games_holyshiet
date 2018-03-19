@@ -6,18 +6,18 @@ using UnityEngine.EventSystems;
 public class ItemAssignController {
 
     #region DELEGATES AND EVENTS
-    public delegate void AttachItemToSlot(Item item);
-    public static event AttachItemToSlot AttachItem;
+    public delegate void SwapID(int ID);
+    public static event SwapID Swapping_ID;
 
     public delegate void RemoveItemFromSlot();
     public static event RemoveItemFromSlot RemoveItem;
 
-    public static void MethodAttachItem(Item item)
+    public static void MethodSwapID(int ID)
     {
-        AttachItemToSlot attachItem = AttachItem;
+        SwapID attachItem = Swapping_ID;
         if(attachItem != null)
         {
-            AttachItem(item);
+            Swapping_ID(ID);
         }
     }
 
