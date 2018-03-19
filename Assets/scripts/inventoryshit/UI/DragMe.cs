@@ -9,7 +9,6 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 {
 
     public bool dragOnSurface = true;
-    public bool isDragging = false;
     private CanvasGroup canvasGroup;
     private GameObject draggedObj;
     private RectTransform draggingPlane;
@@ -25,24 +24,10 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
     }
 
-    public void DetectCanvas(PointerEventData data)
-    {
-        
-    }
-
-
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //make a canvas variable where we get the canvas component in the mouseclick
-        canvas = eventData.pointerPress.GetComponent<Canvas>();
-        //set the object to be dragged to a new GO
-        print(canvas);
-        //TODO:
-        //this variable is null when clicking
-        
+        canvas = eventData.pointerPress.GetComponent<Canvas>();        
         draggedObj = new GameObject("img");
-
-        //set the dragged objs parent to the canvas transform
         draggedObj.transform.SetParent(canvas.transform.GetChild(0), false);
 
         //put it in the bottom of the hieriarchy so it appears infront of other elements
@@ -52,8 +37,6 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
         var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
-
-
 
         //TODO
         //refactor this with code from Slot.cs 
@@ -76,12 +59,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             //else set it as the canvas transform
             draggingPlane = canvas.transform as RectTransform;
         }
-
-        //method to set the data equal to where we started the drag from
-        //SetDraggedPosition(eventData);
-        //PutDragAtMouse();
-        isDragging = true;
-
+        Debug.Log("This slots item id is: " + goSlotVar.slot.GetItem().ID);
+        Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
         
     }
 
@@ -98,11 +77,11 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
     {
         if (draggedObj != null)
         {
-
-
             Destroy(draggedObj);
         }
-        
+        var mesg = eventData.pointerEnter.GetComponent<GOSlot>();
+        ItemAssignController.MethodSwapID(mesg.slot.ID, mesg.slot);
+
     }
 
     void PutDragAtMouse(PointerEventData data)
@@ -131,12 +110,11 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         }
     }*/
 
+    //this apparently fires when letting go of mouse button (0)
+    //maybe this is the magic for onenddrag???
     public void OnPointerClick(PointerEventData eventData)
     {
-        var mesg = eventData.pointerEnter;
-        if (mesg.GetComponent<GOSlot>() != null)
-        {
-            Debug.Log(mesg.GetComponent<GOSlot>().slot.ID);
-        }
+        
+        
     }
 }

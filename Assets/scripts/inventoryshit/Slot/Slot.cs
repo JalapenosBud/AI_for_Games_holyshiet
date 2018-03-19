@@ -5,6 +5,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class Slot : IPrintOutStringNewClass {
 
     public InventoryType SlotType;
@@ -23,6 +24,11 @@ public class Slot : IPrintOutStringNewClass {
     public Slot(int id)
     {
 
+    }
+
+    public Item GetItem()
+    {
+        return tmpItem;
     }
 
     //if tmpItem has been assigned to some value in this class
@@ -50,6 +56,17 @@ public class Slot : IPrintOutStringNewClass {
             tmpItem.SlotRefID = ID;
         }
         
+    }
+    /*
+     * ID at this slot should be equal to the new item passed in
+     * and we get the new item id from the slot where the drag ends
+     */ 
+
+    public void UpdateItemIDAtSlot(Item item)
+    {
+        tmpItem = item;
+        tmpItem.SlotRefID = ID;
+        Debug.Log("SLOT ID is: " + ID + " and newItem ID is: " + item.SlotRefID);
     }
 
     public Sprite GetItemSprite()

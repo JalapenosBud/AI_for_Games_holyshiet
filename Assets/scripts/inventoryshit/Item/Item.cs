@@ -4,6 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
+[System.Serializable]
 public class Item : IPrintOutStringNewClass{
 
     private string name;

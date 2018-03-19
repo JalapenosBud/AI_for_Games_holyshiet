@@ -14,13 +14,20 @@ public class MainInventory  : MonoBehaviour{
     InventoryDatabase inventoryDatabase;
     public void Start()
     {
-
+        ItemAssignController.Swapping_ID += ItemAssignController_Swapping_ID;
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
         ManipulateSlots();
         //TODO: fixme; for now: dummy code 
         slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+    }
+
+    //when event fires, this method will get called
+    private void ItemAssignController_Swapping_ID(int ID, Slot slot)
+    {
+        slot.UpdateItemIDAtSlot(slot.GetItem());
+        print("called from maininventory");
     }
 
     public void Update()

@@ -6,18 +6,22 @@ using UnityEngine.EventSystems;
 public class ItemAssignController {
 
     #region DELEGATES AND EVENTS
-    public delegate void SwapID(int ID);
+    public delegate void SwapID(int ID, Slot slot);
     public static event SwapID Swapping_ID;
 
     public delegate void RemoveItemFromSlot();
     public static event RemoveItemFromSlot RemoveItem;
-
-    public static void MethodSwapID(int ID)
+    /*
+     * when this method is called, the event will fire
+     * so if i call this method from DragMe.cs
+     * i'll have to subscribe to it here
+     */ 
+    public static void MethodSwapID(int ID, Slot slot)
     {
         SwapID attachItem = Swapping_ID;
         if(attachItem != null)
         {
-            Swapping_ID(ID);
+            Swapping_ID(ID,slot);
         }
     }
 
