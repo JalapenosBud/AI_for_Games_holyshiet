@@ -67,6 +67,6 @@ public class Item : IPrintOutStringNewClass{
 
     public void PrintClassName()
     {
-        Debug.Log("ID: " + ID + " , name: " + name);
+        Debug.Log("ID: " + ID + " , name: " + name + " at slotRefID " + SlotRefID);
     }
 }

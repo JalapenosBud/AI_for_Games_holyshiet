@@ -33,7 +33,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //put it in the bottom of the hieriarchy so it appears infront of other elements
         draggedObj.transform.SetAsLastSibling();
         draggedObj.layer = 8;
-        print("layer is: " + draggedObj.layer);
+        //print("layer is: " + draggedObj.layer);
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
         var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
@@ -59,9 +59,11 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             //else set it as the canvas transform
             draggingPlane = canvas.transform as RectTransform;
         }
-        Debug.Log("This slots item id is: " + goSlotVar.slot.GetItem().ID);
-        Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
-        
+        //Debug.Log("This slots item id is: " + goSlotVar.slot.GetItem().ID);
+        //Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
+
+        ItemAssignController.GettingFirstIDMethod(goSlotVar.slot.GetItem());
+        goSlotVar.slot.GetItem().PrintClassName();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -80,8 +82,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             Destroy(draggedObj);
         }
         var mesg = eventData.pointerEnter.GetComponent<GOSlot>();
-        ItemAssignController.MethodSwapID(mesg.slot.ID, mesg.slot);
-
+        ItemAssignController.GettingSecondIDMethod(mesg.slot.GetItem(), mesg.slot);
+        mesg.slot.GetItem().PrintClassName();
     }
 
     void PutDragAtMouse(PointerEventData data)

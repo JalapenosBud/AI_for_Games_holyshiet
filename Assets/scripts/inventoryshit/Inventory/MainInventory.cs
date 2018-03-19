@@ -11,10 +11,16 @@ public class MainInventory  : MonoBehaviour{
 
     private GOSlot[] slots;
 
+    private Item tmpItem;
+
     InventoryDatabase inventoryDatabase;
     public void Start()
     {
-        ItemAssignController.Swapping_ID += ItemAssignController_Swapping_ID;
+        //SUB TO EVENTS
+        ItemAssignController.Getting_First_ID += ItemAssignController_Getting_First_ID;
+        ItemAssignController.Getting_Second_ID += ItemAssignController_Getting_Second_ID;
+
+        //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
         ManipulateSlots();
@@ -23,11 +29,29 @@ public class MainInventory  : MonoBehaviour{
         slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
     }
 
+    
+
     //when event fires, this method will get called
-    private void ItemAssignController_Swapping_ID(int ID, Slot slot)
+    private void ItemAssignController_Getting_First_ID(Item item)
     {
-        slot.UpdateItemIDAtSlot(slot.GetItem());
-        print("called from maininventory");
+        /*
+         * when at destination slot, get that slot id
+         * cache the initial slot info, and then swap when arriving
+         */
+        tmpItem = item;
+        //tmpItem.PrintClassName();
+    }
+    /*
+     * 
+     * the item we have in this class, gets assigned to the parameter
+     * and the slot that gets used in the parameter, calls the method to update item id
+     * 
+     */ 
+    private void ItemAssignController_Getting_Second_ID(Item item, Slot slot)
+    {
+        item = tmpItem;
+        slot.UpdateItemIDAtSlot(item);
+        //tmpItem.PrintClassName();
     }
 
     public void Update()

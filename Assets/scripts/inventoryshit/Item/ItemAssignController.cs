@@ -6,44 +6,34 @@ using UnityEngine.EventSystems;
 public class ItemAssignController {
 
     #region DELEGATES AND EVENTS
-    public delegate void SwapID(int ID, Slot slot);
-    public static event SwapID Swapping_ID;
+    public delegate void GetFirstID(Item item);
+    public static event GetFirstID Getting_First_ID;
 
-    public delegate void RemoveItemFromSlot();
-    public static event RemoveItemFromSlot RemoveItem;
+    public delegate void GetSecondID(Item item, Slot slot);
+    public static event GetSecondID Getting_Second_ID;
+
+    #endregion
     /*
      * when this method is called, the event will fire
      * so if i call this method from DragMe.cs
      * i'll have to subscribe to it here
-     */ 
-    public static void MethodSwapID(int ID, Slot slot)
+     */
+    public static void GettingFirstIDMethod(Item item)
     {
-        SwapID attachItem = Swapping_ID;
-        if(attachItem != null)
+        GetFirstID firstID = Getting_First_ID;
+        if(firstID != null)
         {
-            Swapping_ID(ID,slot);
+            Getting_First_ID(item);
         }
     }
 
-    public static void MethodRemoveItem()
+    public static void GettingSecondIDMethod(Item item, Slot slot)
     {
-        RemoveItemFromSlot removeItem = RemoveItem;
-        if (removeItem != null)
+        GetSecondID secondID = Getting_Second_ID;
+        if (secondID != null)
         {
-            RemoveItem();
+            Getting_Second_ID(item, slot);
         }
-    }
-    #endregion
-
-    public void AssignCorrentObject(object o)
-    {
-
-    }
-
-    public void AttachToSlot(int ID)
-    {
-        //TODO
-        //
     }
 
 }
