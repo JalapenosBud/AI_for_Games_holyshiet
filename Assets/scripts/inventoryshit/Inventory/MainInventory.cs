@@ -12,6 +12,7 @@ public class MainInventory  : MonoBehaviour{
     private GOSlot[] slots;
 
     private Item tmpItem;
+    private Item tmpItemOtherSlot;
 
     InventoryDatabase inventoryDatabase;
     public void Start()
@@ -39,7 +40,6 @@ public class MainInventory  : MonoBehaviour{
          * cache the initial slot info, and then swap when arriving
          */
         tmpItem = item;
-        //tmpItem.PrintClassName();
     }
     /*
      * 
@@ -49,9 +49,15 @@ public class MainInventory  : MonoBehaviour{
      */ 
     private void ItemAssignController_Getting_Second_ID(Item item, Slot slot)
     {
+        //save that object the cursor lands on
+        tmpItemOtherSlot = item;
+        //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
         item = tmpItem;
+        //access GOSLOT array at the old index
+        slots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
         slot.UpdateItemIDAtSlot(item);
-        //tmpItem.PrintClassName();
+        
+
     }
 
     public void Update()
