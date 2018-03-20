@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 [System.Serializable]
 public class Slot : IPrintOutStringNewClass {
@@ -72,6 +67,8 @@ public class Slot : IPrintOutStringNewClass {
     public Sprite GetItemSprite()
     {
         //make this into temp item
+        if (tmpItem == null)
+            return null;
         return tmpItem.GetSprite();
     }
 

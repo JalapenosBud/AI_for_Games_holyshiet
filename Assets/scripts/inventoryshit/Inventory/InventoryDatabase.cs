@@ -1,7 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class InventoryDatabase {
 
@@ -12,6 +10,11 @@ public class InventoryDatabase {
         databaseList.Add(new Item("green", Resources.Load<Sprite>("green")));
         databaseList.Add(new Item("orange", Resources.Load<Sprite>("orange")));
 
+        
+    }
+
+    public void PrintAllClassNames()
+    {
         foreach (var dbitem in databaseList)
         {
             dbitem.PrintClassName();

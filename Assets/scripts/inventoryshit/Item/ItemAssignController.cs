@@ -1,9 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-
-public class ItemAssignController {
+﻿public class ItemAssignController {
 
     #region DELEGATES AND EVENTS
     public delegate void GetFirstID(Item item);

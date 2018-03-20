@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 public class MainInventory  : MonoBehaviour{
@@ -24,10 +21,14 @@ public class MainInventory  : MonoBehaviour{
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
+
         ManipulateSlots();
+
         //TODO: fixme; for now: dummy code 
         slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+
+        inventoryDatabase.PrintAllClassNames();
     }
 
     
@@ -53,10 +54,17 @@ public class MainInventory  : MonoBehaviour{
         tmpItemOtherSlot = item;
         //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
         item = tmpItem;
+
         //access GOSLOT array at the old index
         slots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
+
+        //update item at the new slot
         slot.UpdateItemIDAtSlot(item);
-        
+
+        //assign swapped images properly
+        slots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+        slots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+
 
     }
 

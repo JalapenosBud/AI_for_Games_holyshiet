@@ -1,28 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using System.Linq;
 
 public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
 
     public bool dragOnSurface = true;
-    private CanvasGroup canvasGroup;
     private GameObject draggedObj;
     private RectTransform draggingPlane;
     private Canvas canvas;
-
-    private int tempID;
-
-    private void Start()
-    {
-        //print("calling from dragme");
-        canvasGroup = GetComponent<CanvasGroup>();
-        
-
-    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
