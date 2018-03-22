@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorHeavy  {
-
-	
+public interface IWeapon {
+    
 }

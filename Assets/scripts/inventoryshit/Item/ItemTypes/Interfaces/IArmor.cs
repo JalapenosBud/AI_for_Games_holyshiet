@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmorMedium  {
-
-	
+public interface IArmor {
+    
+    //void SetArmor
 }

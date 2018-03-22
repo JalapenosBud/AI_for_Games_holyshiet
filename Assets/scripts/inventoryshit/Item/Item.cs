@@ -1,17 +1,15 @@
 ﻿using System.Threading;
 using UnityEngine;
 
-[System.Serializable]
-public class Item : IPrintItemName{
+
+public abstract class Item : IPrintItemName{
 
     private string name;
     private Sprite sprite;
     private int _id;
 
     private int _slotRefID;
-
-    private IItemTypeAssigner itemTypeAssigner;
-
+    
     //an object to lock, that only exists one place in memory
     private static object sync = new object();
     //a static variable we increment to generate a unique ID for the items

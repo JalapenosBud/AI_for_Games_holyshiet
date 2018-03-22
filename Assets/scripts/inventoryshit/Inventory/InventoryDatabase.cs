@@ -9,8 +9,8 @@ public class InventoryDatabase {
     {
 
 
-        databaseList.Add(new Item("green", Resources.Load<Sprite>("green")));
-        databaseList.Add(new Item("orange", Resources.Load<Sprite>("orange")));
+        //databaseList.Add(new Item("green", Resources.Load<Sprite>("green")));
+        //databaseList.Add(new Item("orange", Resources.Load<Sprite>("orange")));
 
         
     }
