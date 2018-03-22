@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IArmor {
-
-    void ShowArmor();
+public class ArmorHeavy  {
+    
 }

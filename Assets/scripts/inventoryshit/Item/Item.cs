@@ -4,9 +4,12 @@ using UnityEngine;
 
 public abstract class Item : IPrintItemName{
 
-    private string name;
-    private Sprite sprite;
+    protected string name;
+    protected Sprite sprite;
     private int _id;
+
+    protected IArmor armor;
+    protected IConsumable consumable;
 
     private int _slotRefID;
     
@@ -43,6 +46,16 @@ public abstract class Item : IPrintItemName{
             ID = Interlocked.Increment(ref counter);
         }
 
+    }
+
+    public void SetArmorType(IArmor armor)
+    {
+        this.armor = armor;
+    }
+
+    public void SetConsumableType(IConsumable consumable)
+    {
+        this.consumable = consumable;
     }
 
 
