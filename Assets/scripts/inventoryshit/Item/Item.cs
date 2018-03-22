@@ -57,8 +57,7 @@ public abstract class Item : IPrintItemName{
     {
         this.consumable = consumable;
     }
-
-
+    
 
     public void SetSprite(Sprite sprite)
     {
@@ -77,6 +76,6 @@ public abstract class Item : IPrintItemName{
 
     public void PrintTheItemNames()
     {
-        Debug.Log("ID: " + ID + " , name: " + name + " at slotRefID " + SlotRefID);
+        Debug.Log("ID: " + ID + " , name: " + name + " of type: " + armor.ShowArmor() + " at slotRefID " + SlotRefID);
     }
 }

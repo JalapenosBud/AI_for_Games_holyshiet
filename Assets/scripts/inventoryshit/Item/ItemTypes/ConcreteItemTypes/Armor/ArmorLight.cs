@@ -11,8 +11,8 @@ public class ArmorLight : IArmor
         this.armorType = armorType;
     }
 
-    public void ShowArmor()
+    public string ShowArmor()
     {
-        Debug.Log("this guy have " + armorType + " equipped");
+        return "this guy have " + armorType + " equipped";
     }
 }

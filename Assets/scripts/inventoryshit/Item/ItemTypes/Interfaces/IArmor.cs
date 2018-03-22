@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IArmor {
 
-    void ShowArmor();
+    string ShowArmor();
 }

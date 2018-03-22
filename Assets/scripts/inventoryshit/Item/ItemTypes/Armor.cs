@@ -7,6 +7,5 @@ public class Armor : Item{
     public Armor(string name, Sprite sprite) : base(name, sprite)
     {
     }
-
-
+   
 }

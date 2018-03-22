@@ -17,7 +17,6 @@ public class InventoryDatabase {
 
         databaseList.Add(greenArmor);
         databaseList.Add(orangeArmor);
-
         
     }
 
@@ -26,14 +25,6 @@ public class InventoryDatabase {
         foreach (var dbitem in databaseList)
         {
             dbitem.PrintTheItemNames();
-        }
-    }
-
-    public void PrintArmorTypes()
-    {
-        foreach (var dbitem in databaseList)
-        {
-            //dbitem.();
         }
     }
 
