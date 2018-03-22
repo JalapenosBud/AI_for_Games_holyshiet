@@ -2,13 +2,15 @@
 using UnityEngine;
 
 [System.Serializable]
-public class Item : IPrintOutStringNewClass{
+public class Item : IPrintItemName{
 
     private string name;
     private Sprite sprite;
     private int _id;
 
     private int _slotRefID;
+
+    private IItemTypeAssigner itemTypeAssigner;
 
     //an object to lock, that only exists one place in memory
     private static object sync = new object();
@@ -62,7 +64,7 @@ public class Item : IPrintOutStringNewClass{
         return name;
     }
 
-    public void PrintClassName()
+    public void PrintTheItemNames()
     {
         Debug.Log("ID: " + ID + " , name: " + name + " at slotRefID " + SlotRefID);
     }

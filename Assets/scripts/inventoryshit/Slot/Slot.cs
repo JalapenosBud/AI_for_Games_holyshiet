@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public class Slot : IPrintOutStringNewClass {
+public class Slot : IPrintItemName {
 
     public InventoryType SlotType;
     public Sprite sprite;
@@ -73,7 +73,7 @@ public class Slot : IPrintOutStringNewClass {
     }
 
 
-    public void PrintClassName()
+    public void PrintTheItemNames()
     {
         Debug.Log(ToString() + " " + ID);
     }

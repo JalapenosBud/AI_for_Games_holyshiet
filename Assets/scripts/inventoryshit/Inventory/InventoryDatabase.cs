@@ -7,6 +7,8 @@ public class InventoryDatabase {
 
     public InventoryDatabase()
     {
+
+
         databaseList.Add(new Item("green", Resources.Load<Sprite>("green")));
         databaseList.Add(new Item("orange", Resources.Load<Sprite>("orange")));
 
@@ -17,7 +19,7 @@ public class InventoryDatabase {
     {
         foreach (var dbitem in databaseList)
         {
-            dbitem.PrintClassName();
+            dbitem.PrintTheItemNames();
         }
     }
 
