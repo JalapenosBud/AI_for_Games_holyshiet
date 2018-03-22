@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Armor {
+public enum EnumArmor {
     Head,
     Neck,
     Chest,

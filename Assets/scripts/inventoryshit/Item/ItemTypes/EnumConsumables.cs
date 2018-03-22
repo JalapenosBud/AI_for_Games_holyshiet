@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Consumables { 
+public enum EnumConsumables { 
     Apple,
     Water,
     Potion_Health

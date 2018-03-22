@@ -4,6 +4,6 @@ using UnityEngine;
 
 public interface IItemTypeAssigner  {
 
-	void AssignItemArmor(Armor armor);
-    void AssignItemConsumable(Consumables consumables);
+	void AssignItemArmor(EnumArmor armor);
+    void AssignItemConsumable(EnumConsumables consumables);
 }
