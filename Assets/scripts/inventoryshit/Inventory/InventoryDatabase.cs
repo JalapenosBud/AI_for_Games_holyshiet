@@ -27,7 +27,7 @@ public class InventoryDatabase {
         Armor redArmor = new Armor("red", LoadSprite("red"));
         redArmor.SetArmorType(new ArmorLight(EnumArmor.Neck));
 
-        Armor brownArmor = new Armor("purple", LoadSprite("purple"));
+        Armor brownArmor = new Armor("brown", LoadSprite("brown"));
         brownArmor.SetArmorType(new ArmorLight(EnumArmor.Weapon));
 
         databaseList.Add(greenArmor);
