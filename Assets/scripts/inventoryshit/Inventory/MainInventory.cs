@@ -34,18 +34,23 @@ public class MainInventory  : MonoBehaviour{
         AddItemToSlot("purple");
         AddItemToSlot("blue");
         AddItemToSlot("red");
+        AddItemToSlot("red");
+        AddItemToSlot("red");
+        AddItemToSlot("green");
 
         inventoryDatabase.PrintAllClassNames();
     }
 
     private void AddItemToSlot(string name)
     {
-        while( i < slots.Length)
+        while( i <= slots.Length)
         {
             if(!slots[i].slot.DoWeContainAnItem())
             {
                 slots[i].slot.AssignSlotRefID(LookUpItem(name));
+                print("name: " + slots[i].slot.GetItem().GetName() + " SlotRefID " + slots[i].slot.GetItem().SlotRefID);
                 i++;
+                
                 break;
             }
             //GetItem().SlotRefID == -1
@@ -118,7 +123,7 @@ public class MainInventory  : MonoBehaviour{
         slots = slotspanel.GetComponentsInChildren<GOSlot>();
         slots[0].slot = new BagSlot();
         slots[0].slot.ID = 0;
-
+        Debug.Log("root ID " + slots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = slots[0].slot.ID;
         for (int i = 1; i < slots.Length; i++)
