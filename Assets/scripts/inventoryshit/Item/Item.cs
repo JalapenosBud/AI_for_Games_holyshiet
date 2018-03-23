@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using UnityEngine;
 
-
+[System.Serializable]
 public abstract class Item : IPrintItemName{
 
     protected string name;

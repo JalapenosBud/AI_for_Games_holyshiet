@@ -12,6 +12,8 @@ public class MainInventory  : MonoBehaviour{
     private Item tmpItemOtherSlot;
 
     InventoryDatabase inventoryDatabase;
+
+    public int i;
     public void Start()
     {
         //SUB TO EVENTS
@@ -38,9 +40,15 @@ public class MainInventory  : MonoBehaviour{
 
     private void AddItemToSlot(string name)
     {
-        for (int i = 0; i < slots.Length; i++)
+        while( i < slots.Length)
         {
-            slots[i].slot.AssignSlotRefID(LookUpItem(name));     
+            if(!slots[i].slot.DoWeContainAnItem())
+            {
+                slots[i].slot.AssignSlotRefID(LookUpItem(name));
+                i++;
+                break;
+            }
+            //GetItem().SlotRefID == -1
         }
     }
 
