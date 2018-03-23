@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
+
 public class Slot : IPrintItemName {
 
     public InventoryType SlotType;
