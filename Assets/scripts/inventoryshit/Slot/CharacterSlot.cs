@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterSlot{
+public class CharacterSlot : Slot{
 
 	
 }

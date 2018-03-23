@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 
-public class Slot : IPrintItemName {
+public abstract class Slot : IPrintItemName {
 
     public InventoryType SlotType;
     public Sprite sprite;

@@ -22,15 +22,40 @@ public class MainInventory  : MonoBehaviour{
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
 
-        ManipulateSlots();
+        CreateBagSlots();
 
         //TODO: fixme; for now: dummy code 
-        slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
-        slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+        // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
+        // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+        AddItemToSlot("orange");
+        AddItemToSlot("green");
+        AddItemToSlot("purple");
+        AddItemToSlot("blue");
+        AddItemToSlot("red");
 
         inventoryDatabase.PrintAllClassNames();
     }
 
+    private void AddItemToSlot(string name)
+    {
+        for (int i = 0; i < slots.Length; i++)
+        {
+            slots[i].slot.AssignSlotRefID(LookUpItem(name));     
+        }
+    }
+
+    private Item LookUpItem(string name)
+    {
+        Item holdItem = null;
+        foreach (var item in InventoryDatabase.databaseList)
+        {
+            if(name.Equals(item.GetName()))
+            {
+                holdItem = item;
+            }
+        }
+        return holdItem;
+    }
     
 
     //when event fires, this method will get called
@@ -78,12 +103,12 @@ public class MainInventory  : MonoBehaviour{
 
 
     //refactor: fit to all kind of containers
-    private void ManipulateSlots()
+    private void CreateBagSlots()
     {
         //make a root "node"
         //assign it values
         slots = slotspanel.GetComponentsInChildren<GOSlot>();
-        slots[0].slot = new Slot();
+        slots[0].slot = new BagSlot();
         slots[0].slot.ID = 0;
 
         //set the id to be incremented
@@ -91,7 +116,7 @@ public class MainInventory  : MonoBehaviour{
         for (int i = 1; i < slots.Length; i++)
         {
             //make new slot
-            slots[i].slot = new Slot();
+            slots[i].slot = new BagSlot();
             //increment the counter for each new instantiation
             slotIncrementer.Increment(slotIncrementer.counter);
             //now set the ID to the newly incremented counter
