@@ -51,4 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fedbfb2ba96e2b4f968855da1fafc45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotspanel: {fileID: 0}
+  bagSlotsPanel: {fileID: 0}
+  charSlotsPanel: {fileID: 0}
+  i: 0
