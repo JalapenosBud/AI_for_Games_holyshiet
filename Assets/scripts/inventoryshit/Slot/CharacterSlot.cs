@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterSlot : Slot{
 
-    private EnumArmor enumArmor;
+    //public EnumArmor enumArmor;
 
 	public CharacterSlot(EnumArmor enumArmor) : base()
     {

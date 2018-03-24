@@ -10,7 +10,7 @@ public abstract class Slot : IPrintItemName {
 
     //need to instantiate this somewhere, or get it from somewhere
     private Item tmpItem;
-
+    public EnumArmor enumArmor;
     public Slot()
     {
        

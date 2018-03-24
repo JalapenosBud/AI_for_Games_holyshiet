@@ -33,12 +33,12 @@ public class MainInventory  : MonoBehaviour{
         slotIncrementer = new SlotIncrementer();
 
         CreateCharacterEquipSlots();
-        CreateBagSlots();
+       // CreateBagSlots();
 
         //TODO: fixme; for now: dummy code 
         // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
-        AddItemToSlot("orange");
+       /* AddItemToSlot("orange");
         AddItemToSlot("green");
         AddItemToSlot("purple");
         AddItemToSlot("blue");
@@ -46,7 +46,7 @@ public class MainInventory  : MonoBehaviour{
         AddItemToSlot("red");
         AddItemToSlot("red");
         AddItemToSlot("green");
-
+        */
         inventoryDatabase.PrintAllClassNames();
     }
 
@@ -133,7 +133,7 @@ public class MainInventory  : MonoBehaviour{
         bagSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>();
         bagSlots[0].slot = new BagSlot();
         bagSlots[0].slot.ID = 0;
-        Debug.Log("root ID " + bagSlots[0].slot.ID);
+        //Debug.Log("root ID " + bagSlots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = bagSlots[0].slot.ID;
         for (int i = 1; i < bagSlots.Length; i++)
@@ -145,7 +145,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             bagSlots[i].slot.ID = slotIncrementer.counter;
-            Debug.Log("slot: " + bagSlots[i].slot.ID);
+            //Debug.Log("slot: " + bagSlots[i].slot.ID);
             //Debug.Log("CI: " + createIncrement.counter);
         }
     }
@@ -162,19 +162,25 @@ public class MainInventory  : MonoBehaviour{
         {
             return;
         }
-        characterSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>();
-        characterSlots[0].slot = new BagSlot();
+
+        characterSlots = charSlotsPanel.GetComponentsInChildren<GOSlot>();
+        characterSlots[0].slot = new CharacterSlot(EnumArmor.Head);
         characterSlots[0].slot.ID = 0;
         Debug.Log("root ID " + characterSlots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = characterSlots[0].slot.ID;
-        for (int i = 1; i < bagSlots.Length; i++)
+        for (int i = 1; i < characterSlots.Length; i++)
         {
             //make new slot
             foreach (EnumArmor eee in Enum.GetValues(typeof (EnumArmor)))
             {
+                if(characterSlots[i-1].slot.enumArmor.Equals(eee))
+                {
+                    break;
+                }
+
                 characterSlots[i].slot = new CharacterSlot(eee);
-                break;
+                //break;
             }
             
             //increment the counter for each new instantiation
@@ -182,7 +188,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             characterSlots[i].slot.ID = slotIncrementer.counter;
-            Debug.Log("slot: " + characterSlots[i].slot.ID);
+            Debug.Log("slot: " + characterSlots[i].slot.ID + " with " + characterSlots[i].slot.enumArmor);
             //Debug.Log("CI: " + createIncrement.counter);
         }
 
