@@ -162,7 +162,7 @@ public class MainInventory  : MonoBehaviour{
         {
             return;
         }
-
+        var armorEnum = EnumArmor.Head;
         characterSlots = charSlotsPanel.GetComponentsInChildren<GOSlot>();
         characterSlots[0].slot = new CharacterSlot(EnumArmor.Head);
         characterSlots[0].slot.ID = 0;
@@ -171,25 +171,19 @@ public class MainInventory  : MonoBehaviour{
         slotIncrementer.counter = characterSlots[0].slot.ID;
         for (int i = 1; i < characterSlots.Length; i++)
         {
+            armorEnum++;
+            characterSlots[i].slot = new CharacterSlot();
             //make new slot
-            foreach (EnumArmor eee in Enum.GetValues(typeof (EnumArmor)))
+            foreach (EnumArmor eee in Enum.GetValues(typeof(EnumArmor)))
             {
-                //if(characterSlots[i].slot.enumArmor == EnumArmor.Head)
-                //{
-                //    continue;
-                //}
-
-                characterSlots[i].slot = new CharacterSlot();
-
-                if (characterSlots[i - 1].slot.enumArmor.Equals(eee))
+                armorEnum = eee;
+                if (!characterSlots[i - 1].slot.enumArmor.Equals(armorEnum) && armorEnum > characterSlots[i-1].slot.enumArmor)
                 {
-                    continue;
+                    characterSlots[i].slot.enumArmor = armorEnum;
+                    break;
                 }
-
-                characterSlots[i].slot = new CharacterSlot(eee);
-                //break;
             }
-            
+
             //increment the counter for each new instantiation
             slotIncrementer.Increment(slotIncrementer.counter);
             //now set the ID to the newly incremented counter
