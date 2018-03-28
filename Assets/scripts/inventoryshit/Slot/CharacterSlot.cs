@@ -10,4 +10,6 @@ public class CharacterSlot : Slot{
     {
         this.enumArmor = enumArmor;
     }
+
+    public CharacterSlot() : base() { }
 }

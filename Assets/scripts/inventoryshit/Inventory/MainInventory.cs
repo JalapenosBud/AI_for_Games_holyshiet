@@ -174,9 +174,16 @@ public class MainInventory  : MonoBehaviour{
             //make new slot
             foreach (EnumArmor eee in Enum.GetValues(typeof (EnumArmor)))
             {
-                if(characterSlots[i-1].slot.enumArmor.Equals(eee))
+                //if(characterSlots[i].slot.enumArmor == EnumArmor.Head)
+                //{
+                //    continue;
+                //}
+
+                characterSlots[i].slot = new CharacterSlot();
+
+                if (characterSlots[i - 1].slot.enumArmor.Equals(eee))
                 {
-                    break;
+                    continue;
                 }
 
                 characterSlots[i].slot = new CharacterSlot(eee);
