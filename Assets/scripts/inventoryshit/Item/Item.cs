@@ -16,7 +16,7 @@ public abstract class Item : IPrintItemName{
     //an object to lock, that only exists one place in memory
     private static object sync = new object();
     //a static variable we increment to generate a unique ID for the items
-    private static int counter;
+    private static int counter = 7;
 
     public int SlotRefID { get { return _slotRefID;} set {_slotRefID = value; } }
 
@@ -38,6 +38,7 @@ public abstract class Item : IPrintItemName{
         this.name = name;
         this.sprite = sprite;
         //set to -1, cause it doesnt belong anywhere
+        
         this.SlotRefID = -1;
 
         lock (sync)

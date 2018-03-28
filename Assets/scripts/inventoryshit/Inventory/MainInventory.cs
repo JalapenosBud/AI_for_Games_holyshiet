@@ -14,7 +14,7 @@ public class MainInventory  : MonoBehaviour{
 
     private GOSlot[] characterSlots;
 
-    private List<GOSlot> allSlots = new List<GOSlot>();
+    public static List<GOSlot> allSlots = new List<GOSlot>();
 
     private Item tmpItem;
     private Item tmpItemOtherSlot;
@@ -33,12 +33,13 @@ public class MainInventory  : MonoBehaviour{
         slotIncrementer = new SlotIncrementer();
 
         CreateCharacterEquipSlots();
-       // CreateBagSlots();
+        //TODO
+        CreateBagSlots();
 
         //TODO: fixme; for now: dummy code 
         // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
-       /* AddItemToSlot("orange");
+        AddItemToSlot("orange");
         AddItemToSlot("green");
         AddItemToSlot("purple");
         AddItemToSlot("blue");
@@ -46,7 +47,7 @@ public class MainInventory  : MonoBehaviour{
         AddItemToSlot("red");
         AddItemToSlot("red");
         AddItemToSlot("green");
-        */
+        
         inventoryDatabase.PrintAllClassNames();
     }
 
@@ -145,13 +146,14 @@ public class MainInventory  : MonoBehaviour{
     {
         //make a root "node"
         //assign it values
-        
+        var newCounter = allSlots[characterSlots.Length - 1].slot.ID;
+        newCounter++;
         bagSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>();
         bagSlots[0].slot = new BagSlot();
-        bagSlots[0].slot.ID = 0;
+        bagSlots[0].slot.ID = newCounter;
         //Debug.Log("root ID " + bagSlots[0].slot.ID);
         //set the id to be incremented
-        slotIncrementer.counter = bagSlots[0].slot.ID;
+        slotIncrementer.counter = newCounter;
         for (int i = 1; i < bagSlots.Length; i++)
         {
             //make new slot
@@ -164,6 +166,7 @@ public class MainInventory  : MonoBehaviour{
             //Debug.Log("slot: " + bagSlots[i].slot.ID);
             //Debug.Log("CI: " + createIncrement.counter);
         }
+        allSlots.AddRange(bagSlots);
     }
     /*
      * character slot start at 0
@@ -212,7 +215,7 @@ public class MainInventory  : MonoBehaviour{
 
         //must be called in the end to sum id up
         allSlots.AddRange(characterSlots);
-        allSlots.AddRange(bagSlots);
+        
         /*TODO:
          * when checking for slotrefid, check here
          * so bagslot[0]s slotrefid has to be larger than characterslots[characterslots.length] --  > -- 
