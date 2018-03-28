@@ -9,6 +9,7 @@ public class CharacterSlot : Slot{
 	public CharacterSlot(EnumArmor enumArmor) : base()
     {
         this.enumArmor = enumArmor;
+        SlotType = InventoryType.CHAR_EQUIPMENT;
     }
 
     public CharacterSlot() : base() { }

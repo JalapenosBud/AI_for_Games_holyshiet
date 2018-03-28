@@ -66,6 +66,22 @@ public class MainInventory  : MonoBehaviour{
         }
     }
 
+    //private void AddItemToCharEquipment(string name)
+    //{
+    //    while (i <= bagSlots.Length)
+    //    {
+    //        if (!bagSlots[i].slot.DoWeContainAnItem())
+    //        {
+    //            bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
+    //            print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
+    //            i++;
+
+    //            break;
+    //        }
+    //        //GetItem().SlotRefID == -1
+    //    }
+    //}
+
     private Item LookUpItem(string name)
     {
         Item holdItem = null;
@@ -196,6 +212,13 @@ public class MainInventory  : MonoBehaviour{
 
         //must be called in the end to sum id up
         allSlots.AddRange(characterSlots);
+        allSlots.AddRange(bagSlots);
+        /*TODO:
+         * when checking for slotrefid, check here
+         * so bagslot[0]s slotrefid has to be larger than characterslots[characterslots.length] --  > -- 
+         * 
+         * 
+         */ 
     }
 
 
