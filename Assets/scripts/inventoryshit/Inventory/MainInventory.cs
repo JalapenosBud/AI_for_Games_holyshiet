@@ -49,6 +49,7 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("green");
 
         //add char slots
+        AddItemToCharEquipment("red");
 
         inventoryDatabase.PrintAllClassNames();
     }
@@ -69,21 +70,28 @@ public class MainInventory  : MonoBehaviour{
         }
     }
 
-    /*private void AddItemToCharEquipment(string name)
+    /*have this check for what ArmorEnum that belongs to each item
+     * so when an item gets added, loop through the list, and when enums matches
+     * then assign that slotRefID to that SlotID, so Head goes to slot 0 etc
+     */ 
+    private void AddItemToCharEquipment(string name)
     {
-        while (i <= characterSlots.Length)
+        for (int i = 0; i < characterSlots.Count; i++)
         {
-            if (!characterSlots[i].slot.DoWeContainAnItem())
+            if(!characterSlots[i].slot.DoWeContainAnItem())
             {
-                characterSlots[i].slot.AssignSlotRefID(LookUpItem(name));
-                print("name: " + characterSlots[i].slot.GetItem().GetName() + " SlotRefID " + characterSlots[i].slot.GetItem().SlotRefID);
-                i++;
-
-                break;
+                if(InventoryDatabase.databaseList.Contains(LookUpItem(name)))
+                {
+                    //TODO
+                    /*not a string but an enum, gg ez
+                     * 
+                     */ 
+                }
             }
-            //GetItem().SlotRefID == -1
         }
-    }*/
+
+
+    }
 
     private Item LookUpItem(string name)
     {
