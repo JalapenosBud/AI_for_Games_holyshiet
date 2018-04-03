@@ -10,9 +10,9 @@ public class MainInventory  : MonoBehaviour{
     public GameObject charSlotsPanel;
     private SlotIncrementer slotIncrementer;
 
-    private GOSlot[] bagSlots;
+    private List<GOSlot> bagSlots;
 
-    private GOSlot[] characterSlots;
+    private List<GOSlot> characterSlots;
 
     public static List<GOSlot> allSlots = new List<GOSlot>();
 
@@ -39,21 +39,23 @@ public class MainInventory  : MonoBehaviour{
         //TODO: fixme; for now: dummy code 
         // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
-        AddItemToSlot("orange");
-        AddItemToSlot("green");
-        AddItemToSlot("purple");
-        AddItemToSlot("blue");
-        AddItemToSlot("red");
-        AddItemToSlot("red");
-        AddItemToSlot("red");
-        AddItemToSlot("green");
-        
+        AddItemToBagSlot("orange");
+        AddItemToBagSlot("green");
+        AddItemToBagSlot("purple");
+        AddItemToBagSlot("blue");
+        AddItemToBagSlot("red");
+        AddItemToBagSlot("red");
+        AddItemToBagSlot("red");
+        AddItemToBagSlot("green");
+
+        //add char slots
+
         inventoryDatabase.PrintAllClassNames();
     }
 
-    private void AddItemToSlot(string name)
+    private void AddItemToBagSlot(string name)
     {
-        while( i <= bagSlots.Length)
+        while( i <= bagSlots.Count)
         {
             if(!bagSlots[i].slot.DoWeContainAnItem())
             {
@@ -67,21 +69,21 @@ public class MainInventory  : MonoBehaviour{
         }
     }
 
-    //private void AddItemToCharEquipment(string name)
-    //{
-    //    while (i <= bagSlots.Length)
-    //    {
-    //        if (!bagSlots[i].slot.DoWeContainAnItem())
-    //        {
-    //            bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
-    //            print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
-    //            i++;
+    /*private void AddItemToCharEquipment(string name)
+    {
+        while (i <= characterSlots.Length)
+        {
+            if (!characterSlots[i].slot.DoWeContainAnItem())
+            {
+                characterSlots[i].slot.AssignSlotRefID(LookUpItem(name));
+                print("name: " + characterSlots[i].slot.GetItem().GetName() + " SlotRefID " + characterSlots[i].slot.GetItem().SlotRefID);
+                i++;
 
-    //            break;
-    //        }
-    //        //GetItem().SlotRefID == -1
-    //    }
-    //}
+                break;
+            }
+            //GetItem().SlotRefID == -1
+        }
+    }*/
 
     private Item LookUpItem(string name)
     {
@@ -146,15 +148,15 @@ public class MainInventory  : MonoBehaviour{
     {
         //make a root "node"
         //assign it values
-        var newCounter = allSlots[characterSlots.Length - 1].slot.ID;
+        var newCounter = allSlots[characterSlots.Count - 1].slot.ID;
         newCounter++;
-        bagSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>();
+        bagSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>().ToList();
         bagSlots[0].slot = new BagSlot();
-        bagSlots[0].slot.ID = newCounter;
+        bagSlots[0].slot.ID = 0;
         //Debug.Log("root ID " + bagSlots[0].slot.ID);
         //set the id to be incremented
-        slotIncrementer.counter = newCounter;
-        for (int i = 1; i < bagSlots.Length; i++)
+        slotIncrementer.counter = bagSlots[0].slot.ID;
+        for (int i = 1; i < bagSlots.Count; i++)
         {
             //make new slot
             bagSlots[i].slot = new BagSlot();
@@ -182,13 +184,13 @@ public class MainInventory  : MonoBehaviour{
             return;
         }
         var armorEnum = EnumArmor.Head;
-        characterSlots = charSlotsPanel.GetComponentsInChildren<GOSlot>();
+        characterSlots = charSlotsPanel.GetComponentsInChildren<GOSlot>().ToList();
         characterSlots[0].slot = new CharacterSlot(EnumArmor.Head);
         characterSlots[0].slot.ID = 0;
         Debug.Log("root ID " + characterSlots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = characterSlots[0].slot.ID;
-        for (int i = 1; i < characterSlots.Length; i++)
+        for (int i = 1; i < characterSlots.Count; i++)
         {
             armorEnum++;
             characterSlots[i].slot = new CharacterSlot();
