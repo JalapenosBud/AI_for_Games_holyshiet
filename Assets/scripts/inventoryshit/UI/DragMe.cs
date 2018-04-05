@@ -68,8 +68,17 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             Destroy(draggedObj);
         }
         var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
-        ItemAssignController.GettingSecondIDMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
-        goSlotVar.slot.GetItem().PrintTheItemNames();
+
+        if(goSlotVar.slot.GetItem() == null)
+        {
+            ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
+            //goSlotVar.slot.GetItem().PrintTheItemNames();
+        }
+        else
+        {
+            ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
+            goSlotVar.slot.GetItem().PrintTheItemNames();
+        }
     }
 
     void PutDragAtMouse(PointerEventData data)

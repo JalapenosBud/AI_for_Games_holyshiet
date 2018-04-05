@@ -26,8 +26,8 @@ public class MainInventory  : MonoBehaviour{
     {
         //SUB TO EVENTS
         ItemAssignController.Getting_First_ID += ItemAssignController_Getting_First_ID;
-        ItemAssignController.Getting_Second_ID += ItemAssignController_Getting_Second_ID;
-
+        ItemAssignController.Getting_ID_FOR_SWAP += ItemAssignController_Getting_ID_FOR_ITEM_SWAP;
+        ItemAssignController.JustPlaceItemAtID += ItemAssignController_JustPlaceItemAtID;
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
@@ -56,10 +56,12 @@ public class MainInventory  : MonoBehaviour{
         //inventoryDatabase.PrintAllClassNames();
     }
 
+    
+
     /*item only exists once, so dont try to add several to bags, with the same name, if multiple of same items are needed
      * create several of same type
      * 
-     */ 
+     */
 
     private void AddItemToBagSlot(string name)
     {
@@ -132,7 +134,7 @@ public class MainInventory  : MonoBehaviour{
      * and the slot that gets used in the parameter, calls the method to update item id
      * 
      */ 
-    private void ItemAssignController_Getting_Second_ID(Item item, Slot slot)
+    private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
     {
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
@@ -148,9 +150,17 @@ public class MainInventory  : MonoBehaviour{
         //assign swapped images properly
         allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
         allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+    }
+
+    private void ItemAssignController_JustPlaceItemAtID(Slot slot)
+    {
+        print("placed an item");
+
 
 
     }
+
+
 
     public void Update()
     {

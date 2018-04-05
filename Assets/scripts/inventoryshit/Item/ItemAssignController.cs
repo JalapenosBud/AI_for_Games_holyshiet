@@ -4,8 +4,11 @@
     public delegate void GetFirstID(Item item);
     public static event GetFirstID Getting_First_ID;
 
-    public delegate void GetSecondID(Item item, Slot slot);
-    public static event GetSecondID Getting_Second_ID;
+    public delegate void GetIDForSwap(Item item, Slot slot);
+    public static event GetIDForSwap Getting_ID_FOR_SWAP;
+
+    public delegate void PlaceItemAtID(Slot slot);
+    public static event PlaceItemAtID JustPlaceItemAtID;
 
     #endregion
     /*
@@ -22,12 +25,21 @@
         }
     }
 
-    public static void GettingSecondIDMethod(Item item, Slot slot)
+    public static void GettingIDForSwapMethod(Item item, Slot slot)
     {
-        GetSecondID secondID = Getting_Second_ID;
+        GetIDForSwap secondID = Getting_ID_FOR_SWAP;
         if (secondID != null)
         {
-            Getting_Second_ID(item, slot);
+            Getting_ID_FOR_SWAP(item, slot);
+        }
+    }
+
+    public static void JustPlaceItemAtIDMethod(Slot slot)
+    {
+        PlaceItemAtID placeItemAtID = JustPlaceItemAtID;
+        if(placeItemAtID != null)
+        {
+            JustPlaceItemAtID(slot);
         }
     }
 
