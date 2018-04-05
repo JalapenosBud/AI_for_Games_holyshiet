@@ -5,12 +5,13 @@ using System.Linq;
 
 public class InventoryDatabase {
 
-    public static List<Item> databaseList;
+    public List<Item> databaseList;
 
     public InventoryDatabase()
     {
         databaseList = new List<Item>();
 
+        //maybe have some constructor that auto puts the item into the list
         Armor greenArmor = new Armor("green", LoadSprite("green"));
         greenArmor.SetArmorType(new ArmorLight(EnumArmor.Chest));
 
@@ -32,6 +33,12 @@ public class InventoryDatabase {
         Armor brownArmor = new Armor("brown", LoadSprite("brown"));
         brownArmor.SetArmorType(new ArmorLight(EnumArmor.Weapon));
 
+        Armor anotherBrownie = new Armor("brownie", LoadSprite("brown"));
+        anotherBrownie.SetArmorType(new ArmorLight(EnumArmor.Boots));
+
+        Armor redBeard = new Armor("redBeard", LoadSprite("red"));
+        redBeard.SetArmorType(new ArmorLight(EnumArmor.Legs));
+
         databaseList.Add(greenArmor);
         databaseList.Add(orangeArmor);
         databaseList.Add(purpleArmor);
@@ -39,6 +46,11 @@ public class InventoryDatabase {
         databaseList.Add(yellowArmor);
         databaseList.Add(redArmor);
         databaseList.Add(brownArmor);
+        databaseList.Add(anotherBrownie);
+        databaseList.Add(redBeard);
+        
+
+        PrintAllClassNames();
         
     }
 

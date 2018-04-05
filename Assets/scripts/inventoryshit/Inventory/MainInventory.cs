@@ -44,10 +44,10 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("purple");
         AddItemToBagSlot("blue");
         AddItemToBagSlot("red");
-        AddItemToBagSlot("red");
-        AddItemToBagSlot("red");
-        AddItemToBagSlot("green");
         AddItemToBagSlot("yellow");
+        AddItemToBagSlot("brown");
+        AddItemToBagSlot("redBeard");
+        AddItemToBagSlot("brownie");
         //add char slots
         //AddItemToCharEquipment("red");
 
@@ -56,12 +56,19 @@ public class MainInventory  : MonoBehaviour{
         //inventoryDatabase.PrintAllClassNames();
     }
 
+    /*item only exists once, so dont try to add several to bags, with the same name, if multiple of same items are needed
+     * create several of same type
+     * 
+     */ 
+
     private void AddItemToBagSlot(string name)
     {
         while( i <= bagSlots.Count)
         {
             if(!bagSlots[i].slot.DoWeContainAnItem())
             {
+                
+
                 bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
                 //print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
                 i++;
@@ -71,6 +78,7 @@ public class MainInventory  : MonoBehaviour{
             //GetItem().SlotRefID == -1
         }
     }
+
 
     /*have this check for what ArmorEnum that belongs to each item
      * so when an item gets added, loop through the list, and when enums matches
@@ -82,7 +90,7 @@ public class MainInventory  : MonoBehaviour{
         {
             if(!characterSlots[i].slot.DoWeContainAnItem())
             {
-                if(InventoryDatabase.databaseList.Contains(LookUpItem(name)))
+                if(inventoryDatabase.databaseList.Contains(LookUpItem(name)))
                 {
                     //TODO
                     /*not a string but an enum
@@ -98,7 +106,7 @@ public class MainInventory  : MonoBehaviour{
     private Item LookUpItem(string name)
     {
         Item holdItem = null;
-        foreach (var item in InventoryDatabase.databaseList)
+        foreach (var item in inventoryDatabase.databaseList)
         {
             if(name.Equals(item.GetName()))
             {

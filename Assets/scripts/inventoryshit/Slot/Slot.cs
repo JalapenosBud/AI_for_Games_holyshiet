@@ -30,7 +30,7 @@ public abstract class Slot : IPrintItemName {
     //return true
     public bool DoWeContainAnItem()
     {
-        if(tmpItem != null)
+        if( tmpItem != null)
         {
             return true;
         }
