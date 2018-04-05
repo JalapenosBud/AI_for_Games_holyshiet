@@ -157,6 +157,7 @@ public class MainInventory  : MonoBehaviour{
         
 
         slot.UpdateItemIDAtSlot(tmpItem);
+        allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
         print("placed an item");
     }
 
