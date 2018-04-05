@@ -57,6 +57,12 @@ public abstract class Slot : IPrintItemName {
      * and we get the new item id from the slot where the drag ends
      */ 
 
+    public void RemoveItem(Item item)
+    {
+        item.SetSprite(null);
+        item = null;
+    }
+
     public void UpdateItemIDAtSlot(Item item)
     {
         tmpItem = item;

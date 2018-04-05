@@ -154,11 +154,17 @@ public class MainInventory  : MonoBehaviour{
 
     private void ItemAssignController_JustPlaceItemAtID(Slot slot)
     {
+        Item oldItem = tmpItem;
+        print("placed an item at ref id: " + slot.ID + " and " + oldItem.SlotRefID + " still exists");
         
-
+        allSlots[oldItem.SlotRefID].slot.RemoveItem(oldItem);
+        bagSlots[oldItem.SlotRefID].slot.RemoveItem(oldItem);
+        print("item " + oldItem.GetName() + " exists at " + oldItem.SlotRefID);
         slot.UpdateItemIDAtSlot(tmpItem);
+        
         allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-        print("placed an item");
+
+        
     }
 
 
@@ -198,6 +204,7 @@ public class MainInventory  : MonoBehaviour{
             //Debug.Log("CI: " + createIncrement.counter);
         }
         allSlots.AddRange(bagSlots);
+
     }
     /*
      * character slot start at 0
