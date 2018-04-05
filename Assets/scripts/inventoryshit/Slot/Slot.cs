@@ -59,14 +59,12 @@ public abstract class Slot : IPrintItemName {
 
     public void RemoveItem(Item item)
     {
-        item.SetSprite(null);
         item.SlotRefID = -1;
         item = null;
     }
 
     public void RemoveItem()
     {
-        tmpItem.SetSprite(null);
         tmpItem.SlotRefID = -1;
         tmpItem = null;
     }
