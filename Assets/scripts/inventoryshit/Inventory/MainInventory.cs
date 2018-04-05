@@ -170,7 +170,7 @@ public class MainInventory  : MonoBehaviour{
         newCounter++;
         bagSlots = bagSlotsPanel.GetComponentsInChildren<GOSlot>().ToList();
         bagSlots[0].slot = new BagSlot();
-        bagSlots[0].slot.ID = 0;
+        bagSlots[0].slot.ID = characterSlots.Count;
         //Debug.Log("root ID " + bagSlots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = bagSlots[0].slot.ID;
