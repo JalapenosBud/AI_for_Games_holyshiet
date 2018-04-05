@@ -154,10 +154,10 @@ public class MainInventory  : MonoBehaviour{
 
     private void ItemAssignController_JustPlaceItemAtID(Slot slot)
     {
+        
+
+        slot.UpdateItemIDAtSlot(tmpItem);
         print("placed an item");
-
-
-
     }
 
 
