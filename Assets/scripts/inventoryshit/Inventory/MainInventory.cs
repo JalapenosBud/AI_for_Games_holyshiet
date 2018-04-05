@@ -14,7 +14,7 @@ public class MainInventory  : MonoBehaviour{
 
     private List<GOSlot> characterSlots;
 
-    public static List<GOSlot> allSlots = new List<GOSlot>();
+    public List<GOSlot> allSlots = new List<GOSlot>();
 
     private Item tmpItem;
     private Item tmpItemOtherSlot;
@@ -61,7 +61,7 @@ public class MainInventory  : MonoBehaviour{
             if(!bagSlots[i].slot.DoWeContainAnItem())
             {
                 bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
-                print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
+                //print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
                 i++;
                 
                 break;
@@ -83,7 +83,7 @@ public class MainInventory  : MonoBehaviour{
                 if(InventoryDatabase.databaseList.Contains(LookUpItem(name)))
                 {
                     //TODO
-                    /*not a string but an enum, gg ez
+                    /*not a string but an enum
                      * 
                      */ 
                 }
@@ -130,14 +130,14 @@ public class MainInventory  : MonoBehaviour{
         item = tmpItem;
 
         //access GOSLOT array at the old index
-        bagSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
+        allSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
 
         //update item at the new slot
         slot.UpdateItemIDAtSlot(item);
 
         //assign swapped images properly
-        bagSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-        bagSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+        allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+        allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
 
 
     }
@@ -173,7 +173,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             bagSlots[i].slot.ID = slotIncrementer.counter;
-            //Debug.Log("slot: " + bagSlots[i].slot.ID);
+            Debug.Log("slot: " + bagSlots[i].slot.ID);
             //Debug.Log("CI: " + createIncrement.counter);
         }
         allSlots.AddRange(bagSlots);
