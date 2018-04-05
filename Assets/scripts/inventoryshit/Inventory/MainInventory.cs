@@ -47,11 +47,13 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("red");
         AddItemToBagSlot("red");
         AddItemToBagSlot("green");
-
+        AddItemToBagSlot("yellow");
         //add char slots
-        AddItemToCharEquipment("red");
+        //AddItemToCharEquipment("red");
 
-        inventoryDatabase.PrintAllClassNames();
+        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetName() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
+
+        //inventoryDatabase.PrintAllClassNames();
     }
 
     private void AddItemToBagSlot(string name)
@@ -173,7 +175,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             bagSlots[i].slot.ID = slotIncrementer.counter;
-            Debug.Log("slot: " + bagSlots[i].slot.ID);
+            //Debug.Log("slot: " + bagSlots[i].slot.ID + " has " + bagSlots[i].slot.GetItem());
             //Debug.Log("CI: " + createIncrement.counter);
         }
         allSlots.AddRange(bagSlots);
@@ -195,7 +197,7 @@ public class MainInventory  : MonoBehaviour{
         characterSlots = charSlotsPanel.GetComponentsInChildren<GOSlot>().ToList();
         characterSlots[0].slot = new CharacterSlot(EnumArmor.Head);
         characterSlots[0].slot.ID = 0;
-        Debug.Log("root ID " + characterSlots[0].slot.ID);
+        //Debug.Log("root ID " + characterSlots[0].slot.ID);
         //set the id to be incremented
         slotIncrementer.counter = characterSlots[0].slot.ID;
         for (int i = 1; i < characterSlots.Count; i++)
@@ -218,7 +220,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             characterSlots[i].slot.ID = slotIncrementer.counter;
-            Debug.Log("slot: " + characterSlots[i].slot.ID + " with " + characterSlots[i].slot.enumArmor);
+            //Debug.Log("slot: " + characterSlots[i].slot.ID + " with " + characterSlots[i].slot.enumArmor);
             //Debug.Log("CI: " + createIncrement.counter);
         }
 

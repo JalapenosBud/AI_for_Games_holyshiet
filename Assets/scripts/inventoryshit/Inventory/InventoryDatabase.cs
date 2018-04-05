@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+
 
 public class InventoryDatabase {
 
@@ -42,10 +44,7 @@ public class InventoryDatabase {
 
     public void PrintAllClassNames()
     {
-        foreach (var dbitem in databaseList)
-        {
-            dbitem.PrintTheItemNames();
-        }
+        databaseList.ForEach(x => x.PrintTheItemNames());
     }
 
     private Sprite LoadSprite(string spriteName)

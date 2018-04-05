@@ -16,7 +16,7 @@ public abstract class Item : IPrintItemName{
     //an object to lock, that only exists one place in memory
     private static object sync = new object();
     //a static variable we increment to generate a unique ID for the items
-    private static int counter = 7;
+    private static int counter = 0;
 
     public int SlotRefID { get { return _slotRefID;} set {_slotRefID = value; } }
 
@@ -77,6 +77,9 @@ public abstract class Item : IPrintItemName{
 
     public void PrintTheItemNames()
     {
-        Debug.Log("ID: " + ID + " , name: " + name + " of type: " + armor.ShowArmor() + " at slotRefID " + SlotRefID);
+        if (SlotRefID == -1)
+            return;
+
+        Debug.Log("Item ID: " + ID + " , name: " + name + " of type: " + armor.ShowArmor() + " at slotRefID " + SlotRefID);
     }
 }

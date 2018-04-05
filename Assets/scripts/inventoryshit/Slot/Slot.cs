@@ -61,7 +61,7 @@ public abstract class Slot : IPrintItemName {
     {
         tmpItem = item;
         tmpItem.SlotRefID = ID;
-        Debug.Log("SLOT ID is: " + ID + " and newItem ID is: " + item.SlotRefID);
+        Debug.Log("SLOT ID is: " + ID + " and newItem SlotRefID is: " + item.SlotRefID);
     }
 
     public Sprite GetItemSprite()
