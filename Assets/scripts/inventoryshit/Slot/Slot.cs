@@ -64,6 +64,13 @@ public abstract class Slot : IPrintItemName {
         item = null;
     }
 
+    public void RemoveItem()
+    {
+        tmpItem.SetSprite(null);
+        tmpItem.SlotRefID = -1;
+        tmpItem = null;
+    }
+
     public void UpdateItemIDAtSlot(Item item)
     {
         tmpItem = item;

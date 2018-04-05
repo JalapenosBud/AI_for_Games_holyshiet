@@ -159,9 +159,9 @@ public class MainInventory  : MonoBehaviour{
         
         print("item " + oldItem.GetName() + " exists at " + oldItem.SlotRefID);
         slot.UpdateItemIDAtSlot(tmpItem);
-        bagSlots[oldItem.SlotRefID].slot.RemoveItem(oldItem);
-        allSlots[oldItem.SlotRefID].slot.RemoveItem(oldItem);
-        allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+        //bagSlots[oldItem.SlotRefID].slot.RemoveItem();
+        allSlots[oldItem.SlotRefID].slot.RemoveItem();
+        //allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
 
         
     }
