@@ -60,6 +60,7 @@ public abstract class Slot : IPrintItemName {
     public void RemoveItem(Item item)
     {
         item.SetSprite(null);
+        item.SlotRefID = -1;
         item = null;
     }
 
