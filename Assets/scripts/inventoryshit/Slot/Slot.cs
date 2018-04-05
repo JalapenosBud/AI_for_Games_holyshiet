@@ -13,7 +13,7 @@ public abstract class Slot : IPrintItemName {
     public EnumArmor enumArmor;
     public Slot()
     {
-       
+        
     }
 
     public Slot(int id)

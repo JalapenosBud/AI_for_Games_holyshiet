@@ -49,7 +49,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
 
         ItemAssignController.GettingFirstIDMethod(goSlotVar.slot.GetItem());
-        goSlotVar.slot.GetItem().PrintTheItemNames();
+        //goSlotVar.slot.GetItem().PrintTheItemNames();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -71,7 +71,10 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
         if(goSlotVar.slot.GetItem() == null)
         {
+            print("lands at ID: " + goSlotVar.slot.ID);
+            
             ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
+            print("ID contains: " + goSlotVar.slot.GetItem());
             //goSlotVar.slot.GetItem().PrintTheItemNames();
         }
         else

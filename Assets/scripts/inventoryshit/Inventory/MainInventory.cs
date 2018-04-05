@@ -16,6 +16,7 @@ public class MainInventory  : MonoBehaviour{
 
     public List<GOSlot> allSlots = new List<GOSlot>();
 
+    private Item oldItem;
     private Item tmpItem;
     private Item tmpItemOtherSlot;
 
@@ -127,6 +128,7 @@ public class MainInventory  : MonoBehaviour{
          * cache the initial slot info, and then swap when arriving
          */
         tmpItem = item;
+        oldItem = item;
     }
     /*
      * 
@@ -154,16 +156,19 @@ public class MainInventory  : MonoBehaviour{
 
     private void ItemAssignController_JustPlaceItemAtID(Slot slot)
     {
-        Item oldItem = tmpItem;
-        print("placed an item at ref id: " + slot.ID + " and " + oldItem.SlotRefID + " still exists");
-        
-        print("item " + oldItem.GetName() + " exists at " + oldItem.SlotRefID);
-        slot.UpdateItemIDAtSlot(tmpItem);
-        //bagSlots[oldItem.SlotRefID].slot.RemoveItem();
-        allSlots[oldItem.SlotRefID].slot.RemoveItem();
-        //allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
 
+        //print("placed an item at ref id: " + slot.ID + " and " + oldItem.SlotRefID + " still exists");
+
+        //print("item " + oldItem.GetName() + " exists at " + oldItem.SlotRefID);
+        allSlots[oldItem.SlotRefID].slot.RemoveItem();
+        allSlots[slot.ID].slot.AssignSlotRefID(tmpItem);
         
+
+
+        //allSlots[oldItem.SlotRefID].slot.RemoveItem();
+        //allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+        
+
     }
 
 

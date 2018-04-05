@@ -33,6 +33,8 @@ public abstract class Item : IPrintItemName{
         }
     }
 
+    public Item() { }
+
     public Item(string name, Sprite sprite)
     {
         this.name = name;
