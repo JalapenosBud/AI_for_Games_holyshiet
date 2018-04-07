@@ -56,9 +56,16 @@ public class InventoryDatabase {
 
     public void UpdateAllArmorTypes()
     {
-        foreach(IArmor armors in databaseList)
+        foreach(Item armors in databaseList)
         {
-            armors.AssignArmorType();
+            if(armors is IArmor)
+            {
+                IArmor armor = armors as IArmor;
+                if(armor != null)
+                {
+                    armor.AssignArmorType();
+                }
+            }
         }
         Debug.Log("Item types are updated");
     }
