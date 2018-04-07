@@ -12,5 +12,8 @@ public class CharacterSlot : Slot{
         SlotType = InventoryType.CHAR_EQUIPMENT;
     }
 
-    public CharacterSlot() : base() { }
+    public CharacterSlot() : base()
+    {
+        SlotType = InventoryType.CHAR_EQUIPMENT;
+    }
 }

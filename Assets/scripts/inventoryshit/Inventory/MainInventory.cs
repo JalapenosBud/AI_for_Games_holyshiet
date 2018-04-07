@@ -51,9 +51,9 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("redBeard");
         AddItemToBagSlot("brownie");
         //add char slots
-        AddItemToCharEquipment("redBeard");
+        //AddItemToCharEquipment("redBeard");
 
-        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetName() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
+        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
 
         //inventoryDatabase.PrintAllClassNames();
     }
@@ -65,6 +65,7 @@ public class MainInventory  : MonoBehaviour{
         if(oldItem.GetArmorType() == slot.enumArmor)
         {
             PlaceItem(slot);
+            print("placed item " + oldItem.GetArmorType() + " at " + slot.enumArmor);
         }
     }
 
@@ -258,7 +259,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             characterSlots[i].slot.ID = slotIncrementer.counter;
-            //Debug.Log("slot: " + characterSlots[i].slot.ID + " with " + characterSlots[i].slot.enumArmor);
+            Debug.Log("slot: " + characterSlots[i].slot.ID + " has " + characterSlots[i].slot.enumArmor);
             //Debug.Log("CI: " + createIncrement.counter);
         }
 
