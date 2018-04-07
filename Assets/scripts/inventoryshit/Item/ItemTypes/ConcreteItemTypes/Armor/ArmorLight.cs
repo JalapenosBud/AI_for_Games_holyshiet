@@ -11,6 +11,11 @@ public class ArmorLight : IArmor
         this.armorType = armorType;
     }
 
+    public EnumArmor AssignArmorType()
+    {
+        return this.armorType;
+    }
+
     public string ShowArmor()
     {
         return "this guy have " + armorType + " equipped";

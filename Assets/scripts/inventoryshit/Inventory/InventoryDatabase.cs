@@ -48,10 +48,19 @@ public class InventoryDatabase {
         databaseList.Add(brownArmor);
         databaseList.Add(anotherBrownie);
         databaseList.Add(redBeard);
-        
 
+        UpdateAllArmorTypes();
         PrintAllClassNames();
         
+    }
+
+    public void UpdateAllArmorTypes()
+    {
+        foreach(IArmor armors in databaseList)
+        {
+            armors.AssignArmorType();
+        }
+        Debug.Log("Item types are updated");
     }
 
     public void PrintAllClassNames()
