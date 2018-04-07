@@ -69,14 +69,22 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         }
         var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
 
+        //pre: NO ITEM AT SLOT
+        //post: place item
         if(goSlotVar.slot.GetItem() == null)
         {
-            print("lands at ID: " + goSlotVar.slot.ID);
+            //TODO: copy paste this into the else statement below
+            if(goSlotVar.slot.SlotType == InventoryType.CHAR_EQUIPMENT)
+            {
+                ItemAssignController.JustCheckForArmorEnum(goSlotVar.slot);
+            }
             
             ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
-            print("ID contains: " + goSlotVar.slot.GetItem());
+            //print("ID contains: " + goSlotVar.slot.GetItem());
             //goSlotVar.slot.GetItem().PrintTheItemNames();
         }
+        //pre: ITEM AT SLOT
+        //post: item has been swapped
         else
         {
             ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);

@@ -37,7 +37,7 @@ public class InventoryDatabase {
         anotherBrownie.SetArmorType(new ArmorLight(EnumArmor.Boots));
 
         Armor redBeard = new Armor("redBeard", LoadSprite("red"));
-        redBeard.SetArmorType(new ArmorLight(EnumArmor.Legs));
+        redBeard.SetArmorType(new ArmorLight(EnumArmor.Head));
 
         databaseList.Add(greenArmor);
         databaseList.Add(orangeArmor);

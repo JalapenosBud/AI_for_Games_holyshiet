@@ -29,6 +29,7 @@ public class MainInventory  : MonoBehaviour{
         ItemAssignController.Getting_First_ID += ItemAssignController_Getting_First_ID;
         ItemAssignController.Getting_ID_FOR_SWAP += ItemAssignController_Getting_ID_FOR_ITEM_SWAP;
         ItemAssignController.JustPlaceItemAtID += ItemAssignController_JustPlaceItemAtID;
+        ItemAssignController.CheckForArmorEnum += ItemAssignController_CheckForArmorEnum;
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
@@ -50,14 +51,71 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("redBeard");
         AddItemToBagSlot("brownie");
         //add char slots
-        //AddItemToCharEquipment("red");
+        AddItemToCharEquipment("redBeard");
 
         bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetName() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
 
         //inventoryDatabase.PrintAllClassNames();
     }
 
+    //pre: enum is the same
+    //post: item has been placed
+    private void ItemAssignController_CheckForArmorEnum(Slot slot)
+    {
+        if(oldItem.GetArmorType() == slot.enumArmor)
+        {
+            PlaceItem(slot);
+        }
+    }
+
+    private void ItemAssignController_JustPlaceItemAtID(Slot slot)
+    {
+        PlaceItem(slot);
+    }
+
+    //when event fires, this method will get called
+    private void ItemAssignController_Getting_First_ID(Item item)
+    {
+        /*
+         * when at destination slot, get that slot id
+         * cache the initial slot info, and then swap when arriving
+         */
+        tmpItem = item;
+        oldItem = item;
+    }
+    /*
+     * 
+     * the item we have in this class, gets assigned to the parameter
+     * and the slot that gets used in the parameter, calls the method to update item id
+     * 
+     */
+    private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
+    {
+        //save that object the cursor lands on
+        tmpItemOtherSlot = item;
+        //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
+        item = tmpItem;
+
+        //access GOSLOT array at the old index
+        allSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
+
+        //update item at the new slot
+        slot.UpdateItemIDAtSlot(item);
+
+        //assign swapped images properly
+        allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+        allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+    }
+
+    private void PlaceItem(Slot slot)
+    {
+        allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
+        allSlots[oldItem.SlotRefID].slot.RemoveItem();
+        allSlots[slot.ID].slot.AssignSlotRefID(tmpItem);
+        allSlots[slot.ID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+    }
     
+
 
     /*item only exists once, so dont try to add several to bags, with the same name, if multiple of same items are needed
      * create several of same type
@@ -89,19 +147,18 @@ public class MainInventory  : MonoBehaviour{
      */ 
     private void AddItemToCharEquipment(string name)
     {
-        for (int i = 0; i < characterSlots.Count; i++)
-        {
-            if(!characterSlots[i].slot.DoWeContainAnItem())
-            {
-                if(inventoryDatabase.databaseList.Contains(LookUpItem(name)))
-                {
-                    //TODO
-                    /*not a string but an enum
-                     * 
-                     */ 
-                }
-            }
-        }
+        characterSlots[0].slot.AssignSlotRefID(inventoryDatabase.databaseList[8]);
+
+
+        //for (int i = 0; i < characterSlots.Count; i++)
+        //{
+        //    if(!characterSlots[i].slot.DoWeContainAnItem())
+        //    {
+        //        if(inventoryDatabase.databaseList.Contains(LookUpItem(name)))
+        //        {
+        //        }
+        //    }
+        //}
 
 
     }
@@ -120,58 +177,7 @@ public class MainInventory  : MonoBehaviour{
     }
     
 
-    //when event fires, this method will get called
-    private void ItemAssignController_Getting_First_ID(Item item)
-    {
-        /*
-         * when at destination slot, get that slot id
-         * cache the initial slot info, and then swap when arriving
-         */
-        tmpItem = item;
-        oldItem = item;
-    }
-    /*
-     * 
-     * the item we have in this class, gets assigned to the parameter
-     * and the slot that gets used in the parameter, calls the method to update item id
-     * 
-     */ 
-    private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
-    {
-        //save that object the cursor lands on
-        tmpItemOtherSlot = item;
-        //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
-        item = tmpItem;
-
-        //access GOSLOT array at the old index
-        allSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
-
-        //update item at the new slot
-        slot.UpdateItemIDAtSlot(item);
-
-        //assign swapped images properly
-        allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-        allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
-    }
-
-    private void ItemAssignController_JustPlaceItemAtID(Slot slot)
-    {
-
-        //print("placed an item at ref id: " + slot.ID + " and " + oldItem.SlotRefID + " still exists");
-
-        //print("item " + oldItem.GetName() + " exists at " + oldItem.SlotRefID);
-        allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
-        allSlots[oldItem.SlotRefID].slot.RemoveItem();
-        allSlots[slot.ID].slot.AssignSlotRefID(tmpItem);
-        allSlots[slot.ID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-        
-
-
-        //allSlots[oldItem.SlotRefID].slot.RemoveItem();
-        //allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-        
-
-    }
+    
 
 
 

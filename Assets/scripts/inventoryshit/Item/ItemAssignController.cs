@@ -9,13 +9,11 @@
 
     public delegate void PlaceItemAtID(Slot slot);
     public static event PlaceItemAtID JustPlaceItemAtID;
+    public static event PlaceItemAtID CheckForArmorEnum;
 
     #endregion
-    /*
-     * when this method is called, the event will fire
-     * so if i call this method from DragMe.cs
-     * i'll have to subscribe to it here
-     */
+    
+    //this gets the id that gets dragged, and makes a temp object out of it
     public static void GettingFirstIDMethod(Item item)
     {
         GetFirstID firstID = Getting_First_ID;
@@ -25,6 +23,7 @@
         }
     }
 
+    //takes new and old item and swaps it with new and old slot
     public static void GettingIDForSwapMethod(Item item, Slot slot)
     {
         GetIDForSwap secondID = Getting_ID_FOR_SWAP;
@@ -34,12 +33,22 @@
         }
     }
 
+    //returns the slot that gets hovered over
     public static void JustPlaceItemAtIDMethod(Slot slot)
     {
         PlaceItemAtID placeItemAtID = JustPlaceItemAtID;
         if(placeItemAtID != null)
         {
             JustPlaceItemAtID(slot);
+        }
+    }
+
+    public static void JustCheckForArmorEnum(Slot slot)
+    {
+        PlaceItemAtID checkArmor = CheckForArmorEnum;
+        if(checkArmor != null)
+        {
+            CheckForArmorEnum(slot);
         }
     }
 

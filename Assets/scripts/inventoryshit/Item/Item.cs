@@ -11,6 +11,8 @@ public abstract class Item : IPrintItemName{
     protected IArmor armor;
     protected IConsumable consumable;
 
+    private EnumArmor armorType;
+
     private int _slotRefID;
     
     //an object to lock, that only exists one place in memory
@@ -49,6 +51,11 @@ public abstract class Item : IPrintItemName{
             ID = Interlocked.Increment(ref counter);
         }
 
+    }
+
+    public EnumArmor GetArmorType()
+    {
+        return armorType;
     }
 
     public void SetArmorType(IArmor armor)
