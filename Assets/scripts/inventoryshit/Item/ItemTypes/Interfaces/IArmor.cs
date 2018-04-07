@@ -7,4 +7,6 @@ public interface IArmor {
     string ShowArmor();
 
     EnumArmor AssignArmorType();
+
+    EnumArmor RetrieveEnumArmorType();
 }
