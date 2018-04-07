@@ -12,32 +12,23 @@ public class InventoryDatabase {
         databaseList = new List<Item>();
 
         //maybe have some constructor that auto puts the item into the list
-        Armor greenArmor = new Armor("green", LoadSprite("green"));
-        greenArmor.SetArmorType(new ArmorLight(EnumArmor.Chest));
+        Armor greenArmor = new Armor("green", LoadSprite("green"), EnumArmor.Chest);
 
-        Armor orangeArmor = new Armor("orange", LoadSprite("orange"));
-        orangeArmor.SetArmorType(new ArmorLight(EnumArmor.Head));
+        Armor orangeArmor = new Armor("orange", LoadSprite("orange"), EnumArmor.Head);
 
-        Armor purpleArmor = new Armor("purple", LoadSprite("purple"));
-        purpleArmor.SetArmorType(new ArmorLight(EnumArmor.Boots));
+        Armor purpleArmor = new Armor("purple", LoadSprite("purple"), EnumArmor.Boots);
 
-        Armor blueArmor = new Armor("blue", LoadSprite("blue"));
-        blueArmor.SetArmorType(new ArmorLight(EnumArmor.Gloves));
+        Armor blueArmor = new Armor("blue", LoadSprite("blue"), EnumArmor.Gloves);
 
-        Armor yellowArmor = new Armor("yellow", LoadSprite("yellow"));
-        yellowArmor.SetArmorType(new ArmorLight(EnumArmor.Legs));
+        Armor yellowArmor = new Armor("yellow", LoadSprite("yellow"), EnumArmor.Legs);
 
-        Armor redArmor = new Armor("red", LoadSprite("red"));
-        redArmor.SetArmorType(new ArmorLight(EnumArmor.Neck));
+        Armor redArmor = new Armor("red", LoadSprite("red"), EnumArmor.Neck);
 
-        Armor brownArmor = new Armor("brown", LoadSprite("brown"));
-        brownArmor.SetArmorType(new ArmorLight(EnumArmor.Weapon));
+        Armor brownArmor = new Armor("brown", LoadSprite("brown"), EnumArmor.Weapon);
 
-        Armor anotherBrownie = new Armor("brownie", LoadSprite("brown"));
-        anotherBrownie.SetArmorType(new ArmorLight(EnumArmor.Boots));
+        Armor anotherBrownie = new Armor("brownie", LoadSprite("brown"), EnumArmor.Boots);
 
-        Armor redBeard = new Armor("redBeard", LoadSprite("red"));
-        redBeard.SetArmorType(new ArmorLight(EnumArmor.Head));
+        Armor redBeard = new Armor("redBeard", LoadSprite("red"), EnumArmor.Head);
 
         databaseList.Add(greenArmor);
         databaseList.Add(orangeArmor);
@@ -49,25 +40,24 @@ public class InventoryDatabase {
         databaseList.Add(anotherBrownie);
         databaseList.Add(redBeard);
 
-        UpdateAllArmorTypes();
+        //UpdateAllArmorTypes();
         PrintAllClassNames();
         
     }
 
     public void UpdateAllArmorTypes()
     {
-        foreach(Item armors in databaseList)
+        foreach(Armor armors in databaseList)
         {
-            if(armors is IArmor)
+            IArmor armor = armors as IArmor;
+            if (armor != null)
             {
-                IArmor armor = armors as IArmor;
-                if(armor != null)
-                {
-                    armor.AssignArmorType();
-                }
+                armor.AssignArmorType();
+                Debug.Log(armor);
             }
+            
         }
-        Debug.Log("Item types are updated");
+        //Debug.Log("Item types are updated");
     }
 
     public void PrintAllClassNames()

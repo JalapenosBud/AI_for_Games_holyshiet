@@ -52,8 +52,8 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("brownie");
         //add char slots
         //AddItemToCharEquipment("redBeard");
-
-        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
+        inventoryDatabase.UpdateAllArmorTypes();
+        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
 
         //inventoryDatabase.PrintAllClassNames();
     }
@@ -62,10 +62,10 @@ public class MainInventory  : MonoBehaviour{
     //post: item has been placed
     private void ItemAssignController_CheckForArmorEnum(Slot slot)
     {
-        if(oldItem.GetArmorType() == slot.enumArmor)
+        if(oldItem.GetEnumArmorType() == slot.enumArmor)
         {
             PlaceItem(slot);
-            print("placed item " + oldItem.GetArmorType() + " at " + slot.enumArmor);
+            print("placed item " + oldItem.GetEnumArmorType() + " at " + slot.enumArmor);
         }
     }
 

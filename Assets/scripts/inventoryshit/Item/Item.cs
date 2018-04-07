@@ -7,11 +7,9 @@ public abstract class Item : IPrintItemName{
     protected string name;
     protected Sprite sprite;
     private int _id;
-
-    protected IArmor armor;
     protected IConsumable consumable;
 
-    private EnumArmor armorType;
+    protected EnumArmor armorType;
 
     private int _slotRefID;
     
@@ -53,14 +51,9 @@ public abstract class Item : IPrintItemName{
 
     }
 
-    public EnumArmor GetArmorType()
+    public EnumArmor GetEnumArmorType()
     {
         return armorType;
-    }
-
-    public void SetArmorType(IArmor armor)
-    {
-        this.armor = armor;
     }
 
     public void SetConsumableType(IConsumable consumable)
@@ -89,6 +82,6 @@ public abstract class Item : IPrintItemName{
         if (SlotRefID == -1)
             return;
 
-        Debug.Log("Item ID: " + ID + " , name: " + name + " of type: " + armor.ShowArmor() + " at slotRefID " + SlotRefID);
+        Debug.Log("Item ID: " + ID + " , name: " + name + " of type: " + " at slotRefID " + SlotRefID);
     }
 }
