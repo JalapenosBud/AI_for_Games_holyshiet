@@ -100,26 +100,10 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //post: item has been swapped
         else
         {
-            //TODO
-            if(!Slot.DoesItemTypeMatch(InventoryType.CHAR_EQUIPMENT,goSlotVar.slot.GetItem(),goSlotVar.slot))
-            {
-                return;
-                
-            }
-            else
-            {
-                ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
-                goSlotVar.slot.GetItem().PrintTheItemNames();
-            }
 
-            if (Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
-            {
-                ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
-                goSlotVar.slot.GetItem().PrintTheItemNames();
-            }
 
-            
-
+            ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
+            goSlotVar.slot.GetItem().PrintTheItemNames();
             
         }
     }

@@ -62,12 +62,22 @@ public class MainInventory  : MonoBehaviour{
     //post: item has been placed
     private void ItemAssignController_CheckForArmorEnum(Slot slot)
     {
-
-        if(oldItem.GetEnumArmorType() == slot.enumArmor)
+        if(!slot.DoWeContainAnItem())
         {
-            PlaceItem(slot);
-            print("placed item " + oldItem.GetEnumArmorType() + " at " + slot.enumArmor);
+            if (oldItem.GetEnumArmorType() == slot.enumArmor)
+            {
+                PlaceItem(slot);
+                print("placed item " + oldItem.GetEnumArmorType() + " at " + slot.enumArmor);
+            }
         }
+        else
+        {
+            if(tmpItem.GetEnumArmorType() == slot.GetItem().GetEnumArmorType())
+            {
+                SwapItem(tmpItem, slot);
+            }
+        }
+        
     }
 
     private void ItemAssignController_JustPlaceItemAtID(Slot slot)
@@ -92,6 +102,11 @@ public class MainInventory  : MonoBehaviour{
      * 
      */
     private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
+    {
+        SwapItem(item, slot);
+    }
+
+    private void SwapItem(Item item, Slot slot)
     {
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
