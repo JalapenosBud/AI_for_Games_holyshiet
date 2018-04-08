@@ -1,7 +1,0 @@
-hvert slot skal have et item tiknyttet
-men item skal kunne flytte rundt mellem slots
-så det id man bruger fra slot, skal kun være en reference
-
-så i slot constructoren skal der kunne indgå et item
-men item skal komme fra en "database" lignende struktur
-altså en liste e.l.
