@@ -22,13 +22,13 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //print("layer is: " + draggedObj.layer);
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
-        var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
+        var goSlotVar = eventData.pointerEnter;
 
         //TODO
         //refactor this with code from Slot.cs 
         if (goSlotVar != null)
         {
-            image.sprite = goSlotVar.slot.GetItemSprite();
+            image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
             print(image.sprite);
         }
         //image.sprite = 
@@ -48,7 +48,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //Debug.Log("This slots item id is: " + goSlotVar.slot.GetItem().ID);
         //Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
 
-        ItemAssignController.GettingFirstIDMethod(goSlotVar.slot.GetItem());
+        ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
         //goSlotVar.slot.GetItem().PrintTheItemNames();
     }
 
@@ -67,21 +67,21 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         {
             Destroy(draggedObj);
         }
-        var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
+        var goSlotVar = eventData.pointerEnter;
 
         //pre: NO ITEM AT SLOT
         //post: place item
-        if(goSlotVar.slot.GetItem() == null)
+        if(goSlotVar.GetComponent<GOSlot>().slot.GetItem() == null)
         {
             //TODO: copy paste this into the else statement below
-            if(Slot.DoesSlotTypeMatchCharEquip(goSlotVar.slot.SlotType))
+            if(Slot.DoesSlotTypeMatchCharEquip(goSlotVar.GetComponent<GOSlot>().slot.SlotType))
             {
-                ItemAssignController.JustCheckForArmorEnum(goSlotVar.slot);
+                ItemAssignController.JustCheckForArmorEnum(goSlotVar.GetComponent<GOSlot>().slot);
             }
             
-            if(Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
+            if(Slot.DoesSlotTypeMatchBagEquip(goSlotVar.GetComponent<GOSlot>().slot.SlotType))
             {
-                ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
+                ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.GetComponent<GOSlot>().slot);
             }
             
             //print("ID contains: " + goSlotVar.slot.GetItem());
@@ -91,7 +91,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //post: item has been swapped
         else
         {
-            ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
+            ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
             //goSlotVar.slot.GetItem().PrintTheItemNames();
             
         }
