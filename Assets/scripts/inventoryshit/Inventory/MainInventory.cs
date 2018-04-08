@@ -53,7 +53,7 @@ public class MainInventory  : MonoBehaviour{
         //add char slots
         AddItemToCharEquipment("redBeard");
         inventoryDatabase.UpdateAllArmorTypes();
-        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID));
+        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID + " at a: " + x.slot.SlotType));
 
         //inventoryDatabase.PrintAllClassNames();
     }
@@ -113,7 +113,8 @@ public class MainInventory  : MonoBehaviour{
         tmpItemOtherSlot = item;
         
 
-        if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
+        if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType() 
+            && tmpItem.GetEnumArmorType() != slot.GetItem().GetEnumArmorType())
         {
             return;
            
@@ -309,7 +310,7 @@ public class MainInventory  : MonoBehaviour{
             //now set the ID to the newly incremented counter
             //but only for this object
             characterSlots[i].slot.ID = slotIncrementer.counter;
-            Debug.Log("slot: " + characterSlots[i].slot.ID + " has " + characterSlots[i].slot.enumArmor);
+            Debug.Log("slot: " + characterSlots[i].slot.ID + " has " + characterSlots[i].slot.enumArmor + " and is a: " + characterSlots[i].slot.SlotType);
             //Debug.Log("CI: " + createIncrement.counter);
         }
 

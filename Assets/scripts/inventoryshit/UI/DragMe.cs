@@ -74,21 +74,12 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         if(goSlotVar.slot.GetItem() == null)
         {
             //TODO: copy paste this into the else statement below
-            if(!Slot.DoesSlotTypeMatchCharEquip(goSlotVar.slot.SlotType))
-            {
-                return;
-                
-            }
-            else
+            if(Slot.DoesSlotTypeMatchCharEquip(goSlotVar.slot.SlotType))
             {
                 ItemAssignController.JustCheckForArmorEnum(goSlotVar.slot);
             }
             
-            if(!Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
-            {
-                return;
-            }
-            else
+            if(Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
             {
                 ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
             }
