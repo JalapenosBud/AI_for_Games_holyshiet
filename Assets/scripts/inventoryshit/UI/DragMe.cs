@@ -74,12 +74,25 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         if(goSlotVar.slot.GetItem() == null)
         {
             //TODO: copy paste this into the else statement below
-            if(goSlotVar.slot.SlotType == InventoryType.CHAR_EQUIPMENT)
+            if(!Slot.DoesSlotTypeMatchCharEquip(goSlotVar.slot.SlotType))
+            {
+                return;
+                
+            }
+            else
             {
                 ItemAssignController.JustCheckForArmorEnum(goSlotVar.slot);
             }
             
-            ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
+            if(!Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
+            {
+                return;
+            }
+            else
+            {
+                ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.slot);
+            }
+            
             //print("ID contains: " + goSlotVar.slot.GetItem());
             //goSlotVar.slot.GetItem().PrintTheItemNames();
         }
@@ -87,8 +100,27 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //post: item has been swapped
         else
         {
-            ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
-            goSlotVar.slot.GetItem().PrintTheItemNames();
+            //TODO
+            if(!Slot.DoesItemTypeMatch(InventoryType.CHAR_EQUIPMENT,goSlotVar.slot.GetItem(),goSlotVar.slot))
+            {
+                return;
+                
+            }
+            else
+            {
+                ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
+                goSlotVar.slot.GetItem().PrintTheItemNames();
+            }
+
+            if (Slot.DoesSlotTypeMatchBagEquip(goSlotVar.slot.SlotType))
+            {
+                ItemAssignController.GettingIDForSwapMethod(goSlotVar.slot.GetItem(), goSlotVar.slot);
+                goSlotVar.slot.GetItem().PrintTheItemNames();
+            }
+
+            
+
+            
         }
     }
 

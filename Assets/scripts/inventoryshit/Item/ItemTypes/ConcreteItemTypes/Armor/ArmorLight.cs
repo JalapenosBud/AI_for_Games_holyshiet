@@ -22,6 +22,6 @@ public class ArmorLight : Armor, IArmor
 
     public string ShowArmor()
     {
-        throw new System.NotImplementedException();
+        return "" + armorType;
     }
 }

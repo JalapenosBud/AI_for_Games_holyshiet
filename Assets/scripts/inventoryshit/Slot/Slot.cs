@@ -26,6 +26,34 @@ public abstract class Slot : IPrintItemName {
         return tmpItem;
     }
 
+    public static bool DoesItemTypeMatch(InventoryType type1, Item item, Slot slot)
+    {
+        if (type1 == InventoryType.CHAR_EQUIPMENT && item.GetEnumArmorType() == slot.enumArmor)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    public static bool DoesSlotTypeMatchCharEquip(InventoryType type1)
+    {
+        if(type1 == InventoryType.CHAR_EQUIPMENT)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public static bool DoesSlotTypeMatchBagEquip(InventoryType type1)
+    {
+        if (type1 == InventoryType.BAG)
+        {
+            return true;
+        }
+        return false;
+    }
+
     //if tmpItem has been assigned to some value in this class
     //return true
     public bool DoWeContainAnItem()
