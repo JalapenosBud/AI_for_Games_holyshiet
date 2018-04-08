@@ -112,7 +112,6 @@ public class MainInventory  : MonoBehaviour{
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
         
-
         if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType() 
             && tmpItem.GetEnumArmorType() != slot.GetItem().GetEnumArmorType())
         {
@@ -135,14 +134,20 @@ public class MainInventory  : MonoBehaviour{
             allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
             print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
         }
-
-        
     }
 
     private void SwapItem(Item item, Slot slot)
     {
+        //if landing on a bag item, then check if the old item was in char equip
+        //if it was, and the new armorType doesnt match old, return
+
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
+
+        if (allSlots[tmpItem.SlotRefID].slot.SlotType == InventoryType.CHAR_EQUIPMENT
+            && tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
+            return;
+
         //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
         item = tmpItem;
 
