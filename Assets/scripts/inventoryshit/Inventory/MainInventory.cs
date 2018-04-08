@@ -70,13 +70,6 @@ public class MainInventory  : MonoBehaviour{
                 print("placed item " + oldItem.GetEnumArmorType() + " at " + slot.enumArmor);
             }
         }
-        else
-        {
-            if(tmpItem.GetEnumArmorType() == slot.GetItem().GetEnumArmorType())
-            {
-                SwapItem(tmpItem, slot);
-            }
-        }
         
     }
 
@@ -103,7 +96,46 @@ public class MainInventory  : MonoBehaviour{
      */
     private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
     {
-        SwapItem(item, slot);
+        if(slot.SlotType == InventoryType.BAG)
+        {
+            SwapItem(item, slot);
+        }
+        else if(slot.SlotType == InventoryType.CHAR_EQUIPMENT)
+        {
+            SwapAtCharEquipSlot(item, slot);
+        }
+        
+    }
+
+    private void SwapAtCharEquipSlot(Item item, Slot slot)
+    {
+        //save that object the cursor lands on
+        tmpItemOtherSlot = item;
+        
+
+        if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
+        {
+            return;
+           
+        }
+        else
+        {
+            //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
+            item = tmpItem;
+
+            //access GOSLOT array at the old index
+            allSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
+
+            //update item at the new slot
+            slot.UpdateItemIDAtSlot(item);
+
+            //assign swapped images properly
+            allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
+            allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+            print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
+        }
+
+        
     }
 
     private void SwapItem(Item item, Slot slot)
@@ -122,6 +154,8 @@ public class MainInventory  : MonoBehaviour{
         //assign swapped images properly
         allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
         allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
+
+        print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
     }
 
     private void PlaceItem(Slot slot)
