@@ -127,7 +127,13 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
     //maybe this is the magic for onenddrag???
     public void OnPointerClick(PointerEventData eventData)
     {
-        
+        var goSlotVar = eventData.pointerEnter.GetComponent<GOSlot>();
+
+        if(eventData.button == PointerEventData.InputButton.Right)
+        {
+            ItemAssignController.GettingFirstIDMethod(goSlotVar.slot.GetItem());
+            ItemAssignController.RightClickToEquipMethod(goSlotVar.slot);
+        }
         
     }
 }

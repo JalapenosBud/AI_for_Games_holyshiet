@@ -10,6 +10,8 @@
     public delegate void PlaceItemAtID(Slot slot);
     public static event PlaceItemAtID JustPlaceItemAtID;
     public static event PlaceItemAtID CheckForArmorEnum;
+    public static event PlaceItemAtID RightClickToEquip;
+    public static event PlaceItemAtID RightClickToUnequip;
 
     #endregion
     
@@ -49,6 +51,24 @@
         if(checkArmor != null)
         {
             CheckForArmorEnum(slot);
+        }
+    }
+
+    public static void RightClickToEquipMethod(Slot slot)
+    {
+        PlaceItemAtID rightClick = RightClickToEquip;
+        if(rightClick != null)
+        {
+            RightClickToEquip(slot);
+        }
+    }
+
+    public static void RightClickToUnequipMethod(Slot slot)
+    {
+        PlaceItemAtID rightClickUnequip = RightClickToUnequip;
+        if (rightClickUnequip != null)
+        {
+            RightClickToUnequip(slot);
         }
     }
 

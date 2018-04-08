@@ -30,6 +30,7 @@ public class MainInventory  : MonoBehaviour{
         ItemAssignController.Getting_ID_FOR_SWAP += ItemAssignController_Getting_ID_FOR_ITEM_SWAP;
         ItemAssignController.JustPlaceItemAtID += ItemAssignController_JustPlaceItemAtID;
         ItemAssignController.CheckForArmorEnum += ItemAssignController_CheckForArmorEnum;
+        ItemAssignController.RightClickToEquip += ItemAssignController_RightClickToEquip;
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
@@ -56,6 +57,20 @@ public class MainInventory  : MonoBehaviour{
         bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID + " at a: " + x.slot.SlotType));
 
         //inventoryDatabase.PrintAllClassNames();
+    }
+
+    private void ItemAssignController_RightClickToEquip(Slot slot)
+    {
+        if(slot.SlotType == InventoryType.BAG)
+        {
+            foreach (var charSlots in characterSlots)
+            {
+                if(slot.GetItem().GetEnumArmorType() == charSlots.slot.enumArmor)
+                {
+                    PlaceItem(slot.GetItem(), charSlots.slot.ID);
+                }
+            }
+        }
     }
 
     //pre: enum is the same
@@ -164,6 +179,7 @@ public class MainInventory  : MonoBehaviour{
         print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
     }
 
+    //places item at the slot the mouse cursor lands on
     private void PlaceItem(Slot slot)
     {
         allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
@@ -171,7 +187,15 @@ public class MainInventory  : MonoBehaviour{
         allSlots[slot.ID].slot.AssignSlotRefID(tmpItem);
         allSlots[slot.ID].GetComponent<Image>().sprite = tmpItem.GetSprite();
     }
-    
+
+    //puts item that gets clicked on from bag slot, to char slot
+    private void PlaceItem(Item item, int id)
+    {
+        allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
+        allSlots[oldItem.SlotRefID].slot.RemoveItem();
+        characterSlots[id].slot.AssignSlotRefID(tmpItem);
+        characterSlots[id].GetComponent<Image>().sprite = tmpItem.GetSprite();
+    }
 
 
     /*item only exists once, so dont try to add several to bags, with the same name, if multiple of same items are needed
@@ -232,11 +256,6 @@ public class MainInventory  : MonoBehaviour{
         }
         return holdItem;
     }
-    
-
-    
-
-
 
     public void Update()
     {
