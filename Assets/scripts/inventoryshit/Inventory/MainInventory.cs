@@ -68,6 +68,7 @@ public class MainInventory  : MonoBehaviour{
                 if(slot.GetItem().GetEnumArmorType() == charSlots.slot.enumArmor)
                 {
                     PlaceItem(slot.GetItem(), charSlots.slot.ID);
+                    break;
                 }
             }
         }
