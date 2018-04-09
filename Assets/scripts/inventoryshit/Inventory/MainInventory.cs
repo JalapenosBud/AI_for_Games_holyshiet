@@ -90,6 +90,10 @@ public class MainInventory  : MonoBehaviour{
                 }
             }
         }
+        else if(slot.SlotType == InventoryType.CHAR_EQUIPMENT)
+        {
+            PlaceItemFromCharSlotToBagSlot(slot.GetItem());
+        }
     }
 
     //pre: enum is the same
@@ -245,6 +249,27 @@ public class MainInventory  : MonoBehaviour{
         allSlots[oldItem.SlotRefID].slot.RemoveItem();
         characterSlots[id].slot.AssignSlotRefID(tmpItem);
         characterSlots[id].GetComponent<Image>().sprite = tmpItem.GetSprite();
+    }
+
+    //maybe reverse it so it starts from slot 0
+    private void PlaceItemFromCharSlotToBagSlot(Item item)
+    {
+        for (int i = 0; i < bagSlots.Count; i++)
+        {
+            if(bagSlots[i].slot.DoWeContainAnItem())
+            {
+                continue;
+            }
+            else
+            {
+                allSlots[item.SlotRefID].GetComponent<Image>().sprite = null;
+                allSlots[item.SlotRefID].slot.RemoveItem();
+
+                bagSlots[i].slot.AssignSlotRefID(item);
+                bagSlots[i].GetComponent<Image>().sprite = tmpItem.GetSprite();
+                print("item returned at: " + bagSlots[i].slot.ID);
+            }
+        }
     }
 
 
