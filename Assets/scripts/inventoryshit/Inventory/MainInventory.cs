@@ -254,7 +254,7 @@ public class MainInventory  : MonoBehaviour{
     //maybe reverse it so it starts from slot 0
     private void PlaceItemFromCharSlotToBagSlot(Item item)
     {
-        for (int i = 0; i < bagSlots.Count; i++)
+        for (int i = bagSlots.Count - 1; i >= 0; i--)
         {
             if(bagSlots[i].slot.DoWeContainAnItem())
             {
@@ -267,7 +267,7 @@ public class MainInventory  : MonoBehaviour{
 
                 bagSlots[i].slot.AssignSlotRefID(item);
                 bagSlots[i].GetComponent<Image>().sprite = tmpItem.GetSprite();
-                print("item returned at: " + bagSlots[i].slot.ID);
+                //print("item returned at: " + bagSlots[i].slot.ID);
             }
         }
     }
