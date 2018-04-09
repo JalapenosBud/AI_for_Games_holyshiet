@@ -131,7 +131,9 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
         if(eventData.button == PointerEventData.InputButton.Right)
         {
+            //this gets item we click on and assign it to tmpItem in MainInventory.cs
             ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
+            //then this decides what item should be placed or swapped
             ItemAssignController.RightClickToEquipMethod(goSlotVar.GetComponent<GOSlot>().slot);
         }
         

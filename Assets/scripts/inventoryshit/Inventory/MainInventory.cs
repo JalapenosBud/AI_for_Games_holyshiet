@@ -65,10 +65,24 @@ public class MainInventory  : MonoBehaviour{
         {
             foreach (var charSlots in characterSlots)
             {
+                //if slot's item we right click on == char equip slot armor
                 if(slot.GetItem().GetEnumArmorType() == charSlots.slot.enumArmor)
                 {
-                    PlaceItem(slot.GetItem(), charSlots.slot.ID);
-                    break;
+                    if(!charSlots.slot.DoWeContainAnItem())
+                    {
+                        //place item from the slot we click on
+                        //into the char equip slot
+                        PlaceItem(slot.GetItem(), charSlots.slot.ID);
+                        break;
+                    }
+                    else
+                    {
+                        //param1 get the item in the slot we hover over
+                        //param2 insert into the matching slot on char equip
+                        SwapItem(charSlots.slot.GetItem(), charSlots.slot);
+                        break;
+                    }
+                    
                 }
             }
         }
@@ -151,6 +165,7 @@ public class MainInventory  : MonoBehaviour{
             print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
         }
     }
+
 
     private void SwapItem(Item item, Slot slot)
     {
