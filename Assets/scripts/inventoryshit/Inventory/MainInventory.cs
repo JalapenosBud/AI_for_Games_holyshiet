@@ -52,13 +52,17 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("redBeard");
         AddItemToBagSlot("brownie");
         //add char slots
-        AddItemToCharEquipment("redBeard");
+        //AddItemToCharEquipment("redBeard");
         inventoryDatabase.UpdateAllArmorTypes();
         bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID + " at a: " + x.slot.SlotType));
 
         //inventoryDatabase.PrintAllClassNames();
     }
 
+    /// <summary>
+    /// This decides to place item if destination slot is empty, or swap if its not.
+    /// </summary>
+    /// <param name="slot">The slot the mouse pointer is at</param>
     private void ItemAssignController_RightClickToEquip(Slot slot)
     {
         if(slot.SlotType == InventoryType.BAG)
@@ -103,12 +107,20 @@ public class MainInventory  : MonoBehaviour{
         
     }
 
+    /// <summary>
+    /// This places the item if the slot has a null item
+    /// </summary>
+    /// <param name="slot">The slot the mouse pointer is at</param>
     private void ItemAssignController_JustPlaceItemAtID(Slot slot)
     {
         PlaceItem(slot);
     }
 
     //when event fires, this method will get called
+    /// <summary>
+    /// This caches the item mouse pointer is at, into tmpItem and oldItem
+    /// </summary>
+    /// <param name="item">The item the mouse pointer is at</param>
     private void ItemAssignController_Getting_First_ID(Item item)
     {
         /*
@@ -124,6 +136,11 @@ public class MainInventory  : MonoBehaviour{
      * and the slot that gets used in the parameter, calls the method to update item id
      * 
      */
+    /// <summary>
+    /// This decides how to swap item depending on its a BAG or a CHAR slot
+    /// </summary>
+    /// <param name="item">The item the mouse pointer is at</param>
+    /// <param name="slot">The slot the mouse pointer is at</param>
     private void ItemAssignController_Getting_ID_FOR_ITEM_SWAP(Item item, Slot slot)
     {
         if(slot.SlotType == InventoryType.BAG)
@@ -137,6 +154,11 @@ public class MainInventory  : MonoBehaviour{
         
     }
 
+    /// <summary>
+    /// Swapping when dragging from bag to char slot
+    /// </summary>
+    /// <param name="item">The item the mouse pointer is at</param>
+    /// <param name="slot">The slot the mouse pointer is at</param>
     private void SwapAtCharEquipSlot(Item item, Slot slot)
     {
         //save that object the cursor lands on
@@ -166,7 +188,11 @@ public class MainInventory  : MonoBehaviour{
         }
     }
 
-
+    /// <summary>
+    /// This method swap items from BAG slot to CHAR slots
+    /// </summary>
+    /// <param name="item">The item the mouse pointer is at.</param>
+    /// <param name="slot">The slot the mouse pointer is at.</param>
     private void SwapItem(Item item, Slot slot)
     {
         //if landing on a bag item, then check if the old item was in char equip
@@ -194,8 +220,11 @@ public class MainInventory  : MonoBehaviour{
 
         print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
     }
-
-    //places item at the slot the mouse cursor lands on
+    
+    /// <summary>
+    /// Places item at the slot the mouse cursor lands on.
+    /// </summary>
+    /// <param name="slot"></param>
     private void PlaceItem(Slot slot)
     {
         allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
@@ -204,7 +233,12 @@ public class MainInventory  : MonoBehaviour{
         allSlots[slot.ID].GetComponent<Image>().sprite = tmpItem.GetSprite();
     }
 
-    //puts item that gets clicked on from bag slot, to char slot
+    /// <summary>
+    /// Puts item that gets clicked on from bag slot, to char slot.
+    /// Takes firstly clicked item from allSlots array and puts it into charslots(id) element
+    /// </summary>
+    /// <param name="item"></param>
+    /// <param name="id"></param>
     private void PlaceItem(Item item, int id)
     {
         allSlots[oldItem.SlotRefID].GetComponent<Image>().sprite = null;
@@ -218,22 +252,21 @@ public class MainInventory  : MonoBehaviour{
      * create several of same type
      * 
      */
-
+    /// <summary>
+    /// Adds an item to the bag slots after looking up the name.
+    /// </summary>
+    /// <param name="name">Matches item name in the inventory.</param>
     private void AddItemToBagSlot(string name)
     {
         while( i <= bagSlots.Count)
         {
             if(!bagSlots[i].slot.DoWeContainAnItem())
             {
-                
-
                 bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
                 //print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
                 i++;
-                
                 break;
             }
-            //GetItem().SlotRefID == -1
         }
     }
 
