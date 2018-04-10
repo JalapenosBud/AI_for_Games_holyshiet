@@ -42,19 +42,24 @@ public class MainInventory  : MonoBehaviour{
         //TODO: fixme; for now: dummy code 
         // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+        //ARMOR ITEMS
         AddItemToBagSlot("orange");
         AddItemToBagSlot("green");
-        AddItemToBagSlot("purple");
+        //AddItemToBagSlot("apple");
         AddItemToBagSlot("blue");
         AddItemToBagSlot("red");
         AddItemToBagSlot("yellow");
         AddItemToBagSlot("brown");
         AddItemToBagSlot("redBeard");
         AddItemToBagSlot("brownie");
+        //CONSUMABLE ITEMS
+        AddItemToBagSlot("health_pot");
+
         //add char slots
         //AddItemToCharEquipment("redBeard");
-        inventoryDatabase.UpdateAllArmorTypes();
-        bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID + " at a: " + x.slot.SlotType));
+        //inventoryDatabase.UpdateAllArmorTypes();
+       // inventoryDatabase.UpdateConsumableTypes();
+        //bagSlots.ForEach(x => print("armor name: " + x.slot.GetItem().GetArmor().RetrieveEnumArmorType() + " at SlotRefID " + x.slot.GetItem().SlotRefID + " at a: " + x.slot.SlotType));
 
         //inventoryDatabase.PrintAllClassNames();
     }

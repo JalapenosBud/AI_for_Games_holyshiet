@@ -68,6 +68,16 @@ public abstract class Item : IPrintItemName{
         return armor;
     }
 
+    public IConsumable GetConsumable()
+    {
+        return consumable;
+    }
+
+    public EnumConsumables GetConsumablesType()
+    {
+        return consumable.RetrieveEnumConsumableType();
+    }
+
     public void SetConsumableType(IConsumable consumable)
     {
         this.consumable = consumable;

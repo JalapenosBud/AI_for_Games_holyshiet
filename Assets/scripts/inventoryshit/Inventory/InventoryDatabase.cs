@@ -11,8 +11,11 @@ public class InventoryDatabase {
     {
         databaseList = new List<Item>();
         CreateArmor();
-        CreateConsumables();
+        UpdateItemTypes();
 
+        CreateConsumables();
+        //UpdateConsumableTypes();
+        UpdateItemTypes();
         //UpdateAllArmorTypes();
         PrintAllClassNames();
         
@@ -22,6 +25,11 @@ public class InventoryDatabase {
     {
         Consumable health_potion = new Consumable("health_pot", LoadSprite("purple"));
         health_potion.SetConsumableType(new Potion(EnumConsumables.Potion));
+
+        //Consumable apple = new Consumable("apple", LoadSprite("green"));
+        //apple.SetConsumableType(new )
+
+        databaseList.Add(health_potion);
     }
 
     private void CreateArmor()
@@ -65,11 +73,19 @@ public class InventoryDatabase {
         databaseList.Add(redBeard);
     }
 
-    public void UpdateAllArmorTypes()
+    public void UpdateItemTypes()
     {
-        foreach(Armor armors in databaseList)
+        foreach(Item item in databaseList)
         {
-            armors.GetArmor().AssignArmorType();
+            if(item is Armor)
+            {
+                item.GetArmor().AssignArmorType();
+            }
+            if(item is Consumable)
+            {
+                item.GetConsumable().RetrieveEnumConsumableType();
+            }
+            
             //IArmor armor = armors as IArmor;
             //if (armor != null)
             //{
