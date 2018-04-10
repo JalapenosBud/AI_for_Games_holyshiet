@@ -79,7 +79,8 @@ public class InventoryDatabase {
         {
             if(item is Armor)
             {
-                item.GetArmor().AssignArmorType();
+                Armor tmpArmor = (Armor)item;
+                tmpArmor.GetArmor().AssignArmorType();
             }
             if(item is Consumable)
             {

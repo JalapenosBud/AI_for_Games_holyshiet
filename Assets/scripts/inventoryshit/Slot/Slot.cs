@@ -26,14 +26,14 @@ public abstract class Slot : IPrintItemName {
         return tmpItem;
     }
 
-    public static bool DoesItemTypeMatch(InventoryType type1, Item item, Slot slot)
+    /*public static bool DoesItemTypeMatch(InventoryType type1, Item item, Slot slot)
     {
         if (type1 == InventoryType.CHAR_EQUIPMENT && item.GetEnumArmorType() == slot.enumArmor)
         {
             return true;
         }
         return false;
-    }
+    }*/
 
 
     public static bool DoesSlotTypeMatchCharEquip(InventoryType type1)
