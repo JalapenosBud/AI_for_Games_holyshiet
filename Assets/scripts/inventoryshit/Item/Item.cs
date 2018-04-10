@@ -12,6 +12,7 @@ public abstract class Item : IPrintItemName{
     protected IConsumable consumable;
 
     protected EnumArmor armorType;
+    protected EnumConsumables consumableType;
 
     private int _slotRefID;
     

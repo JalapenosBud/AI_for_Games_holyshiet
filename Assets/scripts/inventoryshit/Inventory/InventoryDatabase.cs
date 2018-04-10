@@ -10,7 +10,22 @@ public class InventoryDatabase {
     public InventoryDatabase()
     {
         databaseList = new List<Item>();
+        CreateArmor();
+        CreateConsumables();
 
+        //UpdateAllArmorTypes();
+        PrintAllClassNames();
+        
+    }
+
+    private void CreateConsumables()
+    {
+        Consumable health_potion = new Consumable("health_pot", LoadSprite("purple"));
+        health_potion.SetConsumableType(new Potion(EnumConsumables.Potion));
+    }
+
+    private void CreateArmor()
+    {
         //maybe have some constructor that auto puts the item into the list
         Armor greenArmor = new Armor("green", LoadSprite("green"));
         greenArmor.SetArmorType(new ArmorLight(EnumArmor.Chest));
@@ -48,10 +63,6 @@ public class InventoryDatabase {
         databaseList.Add(brownArmor);
         databaseList.Add(anotherBrownie);
         databaseList.Add(redBeard);
-
-        //UpdateAllArmorTypes();
-        PrintAllClassNames();
-        
     }
 
     public void UpdateAllArmorTypes()

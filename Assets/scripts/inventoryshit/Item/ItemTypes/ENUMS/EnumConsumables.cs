@@ -5,5 +5,5 @@ using UnityEngine;
 public enum EnumConsumables { 
     Apple,
     Water,
-    Potion_Health
+    Potion
 }
