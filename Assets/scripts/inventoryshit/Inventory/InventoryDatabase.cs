@@ -17,7 +17,7 @@ public class InventoryDatabase {
         //UpdateConsumableTypes();
         UpdateItemTypes();
         //UpdateAllArmorTypes();
-        PrintAllClassNames();
+        //PrintAllClassNames();
         
     }
 

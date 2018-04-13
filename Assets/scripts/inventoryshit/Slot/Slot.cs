@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 [System.Serializable]
-public abstract class Slot : IPrintItemName {
+public abstract class Slot {
 
     public InventoryType SlotType;
     public Sprite sprite;
@@ -110,11 +110,5 @@ public abstract class Slot : IPrintItemName {
         if (tmpItem == null)
             return null;
         return tmpItem.GetSprite();
-    }
-
-
-    public void PrintTheItemNames()
-    {
-        Debug.Log(ToString() + " " + ID);
     }
 }
