@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EmptyItem : Item{
+//inherit Item
+public class EmptyItem {
     
-    public EmptyItem() : base()
+    public EmptyItem()// : base()
     {
 
     }
