@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Armor : Item{
 
-    protected override bool IsStackable
+    public override bool IsStackable
     {
         get
         {
@@ -14,7 +14,7 @@ public class Armor : Item{
 
     public Armor(string name, Sprite sprite) : base(name, sprite)
     {
-
+        stackable = false;
     }
     public Armor()
     {

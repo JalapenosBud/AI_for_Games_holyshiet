@@ -8,9 +8,8 @@ public abstract class Item : IPrintItemName{
     protected Sprite sprite;
     private int _id;
 
-    protected abstract bool IsStackable { get; }
-
-    protected int stackAmount;
+    protected bool stackable;
+    public abstract bool IsStackable { get; }
 
     protected IArmor armor; //er det smart at have interface reference her?
     protected IConsumable consumable;
