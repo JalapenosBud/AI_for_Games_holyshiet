@@ -3,29 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class StackSlot : MonoBehaviour {
+[System.Serializable]
+public class StackSlot : BagSlot {
 
     public List<Item> stackedItems = new List<Item>();
     public int currentStackCount;
+    //have this to know what slot it should ref to
     public Slot slot;
 
     public Text text;
-
-    public void Start()
+    
+    /// <summary>
+    /// Amount to split stack with
+    /// </summary>
+    /// <param name="amount"></param>
+    public void SplitStackedItems(int amount)
     {
+        if(amount > currentStackCount || amount == 0 || currentStackCount <= 1)
+        {
+            return;
+        }
+        else
+        {
+            stackedItems.RemoveRange(0, amount);
+        }
         
     }
 
-
-    public void AddToStackedItems()
+    /*
+     * 
+     */ 
+    public void AddToStackedItems(int amount, Item item)
     {
-
+        for (int i = 0; i < amount; i++)
+        {
+            stackedItems.Add(item);
+        }
     }
-
-    public void SplitStackedItems()
-    {
-
-    }
-
-
 }

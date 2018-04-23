@@ -109,4 +109,9 @@ public abstract class Item : IPrintItemName{
 
         Debug.Log("Item ID: " + ID + " , name: " + name + " of type: " + armor.ShowArmor() + " at slotRefID " + SlotRefID);
     }
+
+    public override string ToString()
+    {
+        return "name: " + name;
+    }
 }

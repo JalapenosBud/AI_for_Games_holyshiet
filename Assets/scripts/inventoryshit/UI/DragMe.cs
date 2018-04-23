@@ -29,7 +29,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         if (goSlotVar != null)
         {
             image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
-            print(image.sprite);
+            print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
         }
         //image.sprite = 
 

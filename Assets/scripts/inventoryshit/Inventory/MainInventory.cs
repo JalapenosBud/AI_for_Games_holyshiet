@@ -42,6 +42,7 @@ public class MainInventory  : MonoBehaviour{
         //TODO: fixme; for now: dummy code 
         // slots[0].slot.AssignSlotRefID(InventoryDatabase.databaseList[0]);
         // slots[1].slot.AssignSlotRefID(InventoryDatabase.databaseList[1]);
+        AddStackableItemToBagSlot("health_pot", 5);
         //ARMOR ITEMS
         AddItemToBagSlot("orange");
         AddItemToBagSlot("green");
@@ -53,8 +54,8 @@ public class MainInventory  : MonoBehaviour{
         AddItemToBagSlot("redBeard");
         AddItemToBagSlot("brownie");
         //CONSUMABLE ITEMS
-        AddItemToBagSlot("health_pot");
-
+        //AddItemToBagSlot("health_pot");
+        
         //add char slots
         //AddItemToCharEquipment("redBeard");
         //inventoryDatabase.UpdateAllArmorTypes();
@@ -292,12 +293,31 @@ public class MainInventory  : MonoBehaviour{
         {
             if(!bagSlots[i].slot.DoWeContainAnItem())
             {
-                bagSlots[i].slot.AssignSlotRefID(LookUpItem(name));
+                bagSlots[i].slot.AssignSlotRefID(LookUpItemInDB(name));
                 //print("name: " + bagSlots[i].slot.GetItem().GetName() + " SlotRefID " + bagSlots[i].slot.GetItem().SlotRefID);
                 i++;
                 break;
             }
         }
+    }
+
+    /*
+     * first find out if theres an empty spot to put the stack at
+     * then assign a bagslot
+     * then cast that bagslot to a stackslot
+     * 
+     * 
+     */
+
+    private void AddStackableItemToBagSlot(string name, int amount)
+    {
+        
+        //cast
+        StackSlot stackSlot = new StackSlot();
+        bagSlots[i].slot = stackSlot as BagSlot;
+
+        stackSlot.AddToStackedItems(amount, LookUpItemInDB(name));
+        AddItemToBagSlot(name);
     }
 
 
@@ -323,7 +343,7 @@ public class MainInventory  : MonoBehaviour{
 
     }
 
-    private Item LookUpItem(string name)
+    private Item LookUpItemInDB(string name)
     {
         Item holdItem = null;
         foreach (var item in inventoryDatabase.databaseList)
