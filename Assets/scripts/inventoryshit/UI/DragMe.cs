@@ -19,7 +19,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //put it in the bottom of the hieriarchy so it appears infront of other elements
         draggedObj.transform.SetAsLastSibling();
         draggedObj.layer = 8;
-        //print("layer is: " + draggedObj.layer);
+
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
         var goSlotVar = eventData.pointerEnter;
@@ -29,11 +29,14 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         if (goSlotVar != null)
         {
             image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
-            print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
-        }
-        //image.sprite = 
+            var slotthingy = goSlotVar.gameObject.GetComponent<GOSlot>().slot;
+            StackSlot slotChild = (StackSlot)slotthingy;
+            
 
-        //image.sprite 
+            print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem()
+                + " and has " + slotChild.stackedItems.Count);
+
+        }
         //if we're dragging on surface
         if (dragOnSurface)
         {
@@ -45,11 +48,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             //else set it as the canvas transform
             draggingPlane = canvas.transform as RectTransform;
         }
-        //Debug.Log("This slots item id is: " + goSlotVar.slot.GetItem().ID);
-        //Debug.Log("This slots item REF id is: " + goSlotVar.slot.GetItem().SlotRefID);
 
         ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
-        //goSlotVar.slot.GetItem().PrintTheItemNames();
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -83,16 +83,12 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             {
                 ItemAssignController.JustPlaceItemAtIDMethod(goSlotVar.GetComponent<GOSlot>().slot);
             }
-            
-            //print("ID contains: " + goSlotVar.slot.GetItem());
-            //goSlotVar.slot.GetItem().PrintTheItemNames();
         }
         //pre: ITEM AT SLOT
         //post: item has been swapped
         else
         {
             ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
-            //goSlotVar.slot.GetItem().PrintTheItemNames();
             
         }
     }

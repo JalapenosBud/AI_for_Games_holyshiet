@@ -31,7 +31,7 @@ public class StackSlot : BagSlot {
     }
 
     /*
-     * 
+     * add to stackeditems as many times as amount tells it to
      */ 
     public void AddToStackedItems(int amount, Item item)
     {

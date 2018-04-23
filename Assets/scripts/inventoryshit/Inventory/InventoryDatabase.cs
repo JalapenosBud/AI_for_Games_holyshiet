@@ -77,9 +77,12 @@ public class InventoryDatabase {
     {
         foreach(Item item in databaseList)
         {
+            //if parent is child
             if(item is Armor)
             {
+                //set child as parent
                 Armor tmpArmor = (Armor)item;
+                //then use the child method
                 tmpArmor.GetArmor().AssignArmorType();
             }
             if(item is Consumable)
