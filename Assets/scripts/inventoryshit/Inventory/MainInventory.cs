@@ -168,7 +168,7 @@ public class MainInventory  : MonoBehaviour{
     /// Swapping when dragging from bag to char slot
     /// </summary>
     /// <param name="item">The item the mouse pointer is at</param>
-    /// <param name="slot">The slot the mouse pointer is at</param>
+    /// <param name="slot">The slot the mouse pointer is at</param> 
     private void SwapAtCharEquipSlot(Item item, Slot slot)
     {
         //save that object the cursor lands on
@@ -198,6 +198,12 @@ public class MainInventory  : MonoBehaviour{
         }
     }
 
+    private void SwapConsumableAndRegularArmor(Item item, Slot slot)
+    {
+        tmpItemOtherSlot = item;
+
+    }
+
     /// <summary>
     /// This method swap items from BAG slot to CHAR slots
     /// </summary>
@@ -211,6 +217,7 @@ public class MainInventory  : MonoBehaviour{
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
 
+        //make it NOT possible to swap to char equip slot when its not a compatible type
         if (allSlots[tmpItem.SlotRefID].slot.SlotType == InventoryType.CHAR_EQUIPMENT
             && tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
             return;
@@ -228,7 +235,7 @@ public class MainInventory  : MonoBehaviour{
         allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
         allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
 
-        print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
+        //print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
     }
     
     /// <summary>

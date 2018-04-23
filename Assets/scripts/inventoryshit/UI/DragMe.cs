@@ -12,7 +12,10 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        canvas = eventData.pointerPress.GetComponent<Canvas>();        
+        canvas = eventData.pointerPress.GetComponent<Canvas>();
+        var goSlotVar = eventData.pointerEnter;
+        //if(goSlotVar.GetComponent<GOSlot>().slot.GetItem() is Consumable)
+
         draggedObj = new GameObject("img");
         draggedObj.transform.SetParent(canvas.transform.GetChild(0), false);
 
@@ -22,7 +25,7 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
         //add an image to the dragged obj
         var image = draggedObj.AddComponent<Image>();
-        var goSlotVar = eventData.pointerEnter;
+        
 
         //TODO
         //refactor this with code from Slot.cs 
@@ -30,12 +33,18 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         {
             image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
             var slotthingy = goSlotVar.gameObject.GetComponent<GOSlot>().slot;
-            StackSlot slotChild = (StackSlot)slotthingy;
-            
 
-            print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem()
+            if(slotthingy is StackSlot)
+            {
+                StackSlot slotChild = (StackSlot)slotthingy;
+
+                print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem()
                 + " and has " + slotChild.stackedItems.Count);
-
+            }
+            else
+            {
+                print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
+            }
         }
         //if we're dragging on surface
         if (dragOnSurface)
@@ -127,10 +136,19 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
         if(eventData.button == PointerEventData.InputButton.Right)
         {
-            //this gets item we click on and assign it to tmpItem in MainInventory.cs
-            ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
-            //then this decides what item should be placed or swapped
-            ItemAssignController.RightClickToEquipMethod(goSlotVar.GetComponent<GOSlot>().slot);
+            if (goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem() is Armor)
+            {
+
+                //this gets item we click on and assign it to tmpItem in MainInventory.cs
+                ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
+                //then this decides what item should be placed or swapped
+                ItemAssignController.RightClickToEquipMethod(goSlotVar.GetComponent<GOSlot>().slot);
+            }
+            else if(goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem() is Consumable)
+            {
+                //TODO: implement logic for character stats to boost whatever stat when right clicking
+                print("consumed 1 unit");
+            }
         }
         
     }
