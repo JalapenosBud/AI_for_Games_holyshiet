@@ -97,7 +97,11 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //post: item has been swapped
         else
         {
-            ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
+            if(Slot.DoesSlotTypeMatchCharEquip(goSlotVar.GetComponent<GOSlot>().slot.SlotType))
+            {
+                ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
+            }
+            
             
         }
     }

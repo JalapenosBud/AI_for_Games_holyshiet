@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class StackSlot : BagSlot {
 
     public List<Item> stackedItems = new List<Item>();
+    //lav currentstackamount om, eller sæt den til stackedItems.count
+    //
     public int currentStackCount;
     //have this to know what slot it should ref to
     public Slot slot;

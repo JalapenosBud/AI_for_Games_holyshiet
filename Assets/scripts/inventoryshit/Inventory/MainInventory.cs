@@ -174,6 +174,9 @@ public class MainInventory  : MonoBehaviour{
         //save that object the cursor lands on
         tmpItemOtherSlot = item;
         
+        //if item getting dragged (tmpitem) doesnt match the item it lands at (enumarmortype)
+        //and item getting dragged doesnt match the slot's item's armortype, just double checking so
+        //you can't accidentally place an item in the wrong spot
         if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType() 
             && tmpItem.GetEnumArmorType() != slot.GetItem().GetEnumArmorType())
         {
