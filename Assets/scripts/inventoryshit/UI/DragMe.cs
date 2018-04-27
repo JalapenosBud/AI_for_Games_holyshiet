@@ -32,19 +32,9 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         if (goSlotVar != null)
         {
             image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
-            var slotthingy = goSlotVar.gameObject.GetComponent<GOSlot>().slot;
-
-            if(slotthingy is StackSlot)
-            {
-                StackSlot slotChild = (StackSlot)slotthingy;
-
-                print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem()
-                + " and has " + slotChild.stackedItems.Count);
-            }
-            else
-            {
-                print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
-            }
+            
+            print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
+            
         }
         //if we're dragging on surface
         if (dragOnSurface)
@@ -97,12 +87,9 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         //post: item has been swapped
         else
         {
-            if(Slot.DoesSlotTypeMatchCharEquip(goSlotVar.GetComponent<GOSlot>().slot.SlotType))
-            {
-                ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
-            }
             
-            
+            ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
+                   
         }
     }
 

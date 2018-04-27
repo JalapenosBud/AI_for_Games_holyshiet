@@ -171,13 +171,12 @@ public class MainInventory  : MonoBehaviour{
     /// <param name="slot">The slot the mouse pointer is at</param> 
     private void SwapAtCharEquipSlot(Item item, Slot slot)
     {
-        //save that object the cursor lands on
+
         tmpItemOtherSlot = item;
-        
         //if item getting dragged (tmpitem) doesnt match the item it lands at (enumarmortype)
         //and item getting dragged doesnt match the slot's item's armortype, just double checking so
         //you can't accidentally place an item in the wrong spot
-        if(tmpItem.GetEnumArmorType() != item.GetEnumArmorType() 
+        if (tmpItem.GetEnumArmorType() != item.GetEnumArmorType() 
             && tmpItem.GetEnumArmorType() != slot.GetItem().GetEnumArmorType())
         {
             return;
@@ -185,21 +184,10 @@ public class MainInventory  : MonoBehaviour{
         }
         else
         {
-            //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
-            item = tmpItem;
-
-            //access GOSLOT array at the old index
-            allSlots[tmpItem.SlotRefID].slot.UpdateItemIDAtSlot(tmpItemOtherSlot);
-
-            //update item at the new slot
-            slot.UpdateItemIDAtSlot(item);
-
-            //assign swapped images properly
-            allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
-            allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
-            print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
+            SwapItemTemplateMethod(item, slot);
         }
     }
+
 
     private void SwapConsumableAndRegularArmor(Item item, Slot slot)
     {
@@ -217,14 +205,17 @@ public class MainInventory  : MonoBehaviour{
         //if landing on a bag item, then check if the old item was in char equip
         //if it was, and the new armorType doesnt match old, return
 
-        //save that object the cursor lands on
         tmpItemOtherSlot = item;
-
         //make it NOT possible to swap to char equip slot when its not a compatible type
         if (allSlots[tmpItem.SlotRefID].slot.SlotType == InventoryType.CHAR_EQUIPMENT
             && tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
             return;
 
+        SwapItemTemplateMethod(item, slot);
+    }
+
+    private void SwapItemTemplateMethod(Item item, Slot slot)
+    {
         //now set the object the cursor landed on, to the old "began dragged" object to tmpItem
         item = tmpItem;
 
@@ -237,8 +228,6 @@ public class MainInventory  : MonoBehaviour{
         //assign swapped images properly
         allSlots[tmpItem.SlotRefID].GetComponent<Image>().sprite = tmpItem.GetSprite();
         allSlots[tmpItemOtherSlot.SlotRefID].GetComponent<Image>().sprite = tmpItemOtherSlot.GetSprite();
-
-        //print("placed item " + item.GetEnumArmorType() + " at " + slot.GetItem().GetEnumArmorType());
     }
     
     /// <summary>
@@ -321,12 +310,12 @@ public class MainInventory  : MonoBehaviour{
 
     private void AddStackableItemToBagSlot(string name, int amount)
     {
-        
-        //cast
-        StackSlot stackSlot = new StackSlot();
-        bagSlots[i].slot = stackSlot as BagSlot;
+        Slot slot = bagSlots[i].slot;
+        //set child as parent
+        BagSlot bagSlot = (BagSlot)slot;
+        //then use the child method
 
-        stackSlot.AddToStackedItems(amount, LookUpItemInDB(name));
+        bagSlot.AddToStackedItems(amount, LookUpItemInDB(name));
         AddItemToBagSlot(name);
     }
 
