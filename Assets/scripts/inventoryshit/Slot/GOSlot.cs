@@ -11,6 +11,13 @@ public class GOSlot : MonoBehaviour {
         if(slot != null)
         {
             GetComponent<Image>().sprite = slot.GetItemSprite();
+            if(slot.DoWeContainAnItem())
+            {
+                if(slot.GetItem() is Consumable)
+                {
+                   // stackingTxt.text = slot.GetItem().
+                }
+            }
         }
 
     }

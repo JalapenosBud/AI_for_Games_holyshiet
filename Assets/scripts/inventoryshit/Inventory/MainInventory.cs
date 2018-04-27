@@ -202,6 +202,8 @@ public class MainInventory  : MonoBehaviour{
     /// <param name="slot">The slot the mouse pointer is at.</param>
     private void SwapItem(Item item, Slot slot)
     {
+        var startDragBagSlot = (BagSlot)bagSlots[tmpItem.SlotRefID].slot;
+        print(startDragBagSlot.stackedItems.Count);
         //if landing on a bag item, then check if the old item was in char equip
         //if it was, and the new armorType doesnt match old, return
 
@@ -212,6 +214,12 @@ public class MainInventory  : MonoBehaviour{
             return;
 
         SwapItemTemplateMethod(item, slot);
+
+        //where it lands
+        var endDragBagSlot = (BagSlot)bagSlots[tmpItemOtherSlot.SlotRefID].slot;
+        print(endDragBagSlot.stackedItems.Count);
+
+        
     }
 
     private void SwapItemTemplateMethod(Item item, Slot slot)
@@ -317,6 +325,7 @@ public class MainInventory  : MonoBehaviour{
 
         bagSlot.AddToStackedItems(amount, LookUpItemInDB(name));
         AddItemToBagSlot(name);
+        print(name + " has " + bagSlot.stackedItems.Count + " items.");
     }
 
 

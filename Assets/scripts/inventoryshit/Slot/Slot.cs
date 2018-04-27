@@ -97,7 +97,7 @@ public abstract class Slot {
         tmpItem = null;
     }
 
-    public void UpdateItemIDAtSlot(Item item)
+    public virtual void UpdateItemIDAtSlot(Item item)
     {
         tmpItem = item;
         tmpItem.SlotRefID = ID;

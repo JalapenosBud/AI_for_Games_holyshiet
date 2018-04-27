@@ -89,7 +89,13 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         {
             
             ItemAssignController.GettingIDForSwapMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem(), goSlotVar.GetComponent<GOSlot>().slot);
-                   
+            if(goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem() is Consumable)
+            {
+                BagSlot tmpSlot = (BagSlot)goSlotVar.GetComponent<GOSlot>().slot;
+
+                //print(goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem() + " has " + tmpSlot.stackedItems.Count);
+
+            }
         }
     }
 
