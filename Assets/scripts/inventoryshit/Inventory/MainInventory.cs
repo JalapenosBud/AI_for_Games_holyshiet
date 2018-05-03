@@ -219,8 +219,7 @@ public class MainInventory  : MonoBehaviour{
     /// <param name="slot">The slot the mouse pointer is at.</param>
     private void SwapItem(Item item, Slot slot)
     {
-        var startDragBagSlot = (BagSlot)bagSlots[tmpItem.SlotRefID].slot;
-        print(retrieveStackAmount);
+        print("slot at: " + tmpItem.SlotRefID + " has  " + retrieveStackAmount + " items");
         //if landing on a bag item, then check if the old item was in char equip
         //if it was, and the new armorType doesnt match old, return
 
@@ -233,15 +232,24 @@ public class MainInventory  : MonoBehaviour{
         SwapItemTemplateMethod(item, slot);
 
         //where it lands
-        var endDragBagSlot = (BagSlot)bagSlots[tmpItemOtherSlot.SlotRefID].slot;
+        var endDragBagSlot = (BagSlot)allSlots[tmpItemOtherSlot.SlotRefID].slot;
 
-        endDragBagSlot.AddToStackedItems(startDragBagSlot.CurrentStackCount, item);
+        endDragBagSlot.AddToStackedItems(retrieveStackAmount, item);
 
-        print(retrieveStackAmount);
+        print("slot at: " + tmpItem.SlotRefID + " has  " + retrieveStackAmount + " items");
 
         //remember the text component is stored IN TEH CHILD OBJECT!!!
-        bagSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = startDragBagSlot.CurrentStackCount.ToString();
+        allSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = retrieveStackAmount.ToString();
         print("landing id is: " + tmpItemOtherSlot.SlotRefID + " start landing id is: " + tmpItem.SlotRefID);
+        
+        foreach (GOSlot bs in bagSlots)
+        {
+            BagSlot bss = (BagSlot)bs.slot;
+            if (bss.CurrentStackCount == 0)
+                return;
+            print(bss.CurrentStackCount);
+        }
+
         
     }
 
