@@ -216,21 +216,16 @@ public class MainInventory  : MonoBehaviour{
 
     private void ItemAssignController_updateStackAmountWithTextGO(GOSlot endSlot)
     {
-        if (endSlot != null)
+        foreach(var bagss in bagSlots)
         {
-            //GetComponent<Image>().sprite = endSlot.GetItemSprite();
-
-            if (endSlot.slot is BagSlot)
+            if(bagss.slot.GetItem() is Consumable)
             {
-                BagSlot bagSlot = (BagSlot)endSlot.slot;
-
-                // stackingTxt.text = slot.GetItem().
-                //endSlot.stackingTxt = GetComponentInChildren<Text>();
-                //bagSlot.add
-                endSlot.stackingTxt.text = retrieveStackAmount.ToString();
+                print("yes i am");
+                bagss.stackingTxt.text = retrieveStackAmount.ToString();
             }
-
         }
+
+
     }
 
     /// <summary>
@@ -244,31 +239,23 @@ public class MainInventory  : MonoBehaviour{
         //if landing on a bag item, then check if the old item was in char equip
         //if it was, and the new armorType doesnt match old, return
 
+        //where it lands
+        
         tmpItemOtherSlot = item;
         //make it NOT possible to swap to char equip slot when its not a compatible type
         if (allSlots[tmpItem.SlotRefID].slot.SlotType == InventoryType.CHAR_EQUIPMENT
             && tmpItem.GetEnumArmorType() != item.GetEnumArmorType())
             return;
-
         SwapItemTemplateMethod(item, slot);
 
-        //where it lands
-        var endDragBagSlot = (BagSlot)allSlots[tmpItemOtherSlot.SlotRefID].slot;
 
-        endDragBagSlot.AddToStackedItems(retrieveStackAmount, item);
-
-        print("slot at: " + tmpItem.SlotRefID + " has  " + endDragBagSlot.CurrentStackCount + " items");
-
-        //remember the text component is stored IN TEH CHILD OBJECT!!!
-        allSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = " " + retrieveStackAmount;
-        print(tmpItemOtherSlot.SlotRefID + " has " + retrieveStackAmount);
         
         foreach (GOSlot bs in bagSlots)
         {
             BagSlot bss = (BagSlot)bs.slot;
             if (bss.CurrentStackCount == 0)
                 return;
-            print(bss.CurrentStackCount);
+            print(bss.CurrentStackCount +  " at slot id: " + bs.slot.ID);
         }
 
         

@@ -44,6 +44,11 @@ public class BagSlot : Slot{
             stackedItems.Add(item);
         }
     }
-    
-	
+
+    public override string ToString()
+    {
+        return "" + CurrentStackCount;
+    }
+
+
 }
