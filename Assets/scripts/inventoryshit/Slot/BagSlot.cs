@@ -7,7 +7,7 @@ public class BagSlot : Slot{
     public List<Item> stackedItems = new List<Item>();
     //lav currentstackamount om, eller sæt den til stackedItems.count
     //
-    public int currentStackCount;
+    public int CurrentStackCount { get { return stackedItems.Count; }}
     //have this to know what slot it should ref to
     public Slot slot;
 
@@ -23,7 +23,7 @@ public class BagSlot : Slot{
     /// <param name="amount"></param>
     public void SplitStackedItems(int amount)
     {
-        if (amount > currentStackCount || amount == 0 || currentStackCount <= 1)
+        if (amount > CurrentStackCount || amount == 0 || CurrentStackCount <= 1)
         {
             return;
         }

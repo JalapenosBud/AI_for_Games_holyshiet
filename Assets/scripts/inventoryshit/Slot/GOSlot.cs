@@ -15,7 +15,11 @@ public class GOSlot : MonoBehaviour {
             {
                 if(slot.GetItem() is Consumable)
                 {
-                   // stackingTxt.text = slot.GetItem().
+                    BagSlot bagSlot = (BagSlot)slot;
+                    
+                    // stackingTxt.text = slot.GetItem().
+                    stackingTxt = GetComponentInChildren<Text>();
+                    stackingTxt.text = bagSlot.CurrentStackCount.ToString();
                 }
             }
         }
