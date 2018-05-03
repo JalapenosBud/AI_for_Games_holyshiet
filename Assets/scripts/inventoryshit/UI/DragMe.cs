@@ -101,6 +101,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
 
             }
         }
+
+        ItemAssignController.UpdateStackInfo(goSlotVar.GetComponent<GOSlot>());
     }
 
     void PutDragAtMouse(PointerEventData data)

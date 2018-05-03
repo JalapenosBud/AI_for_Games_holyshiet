@@ -8,7 +8,8 @@ public class GOSlot : MonoBehaviour {
 
     public void Start()
     {
-        if(slot != null)
+        stackingTxt = GetComponentInChildren<Text>();
+        if (slot != null)
         {
             GetComponent<Image>().sprite = slot.GetItemSprite();
             if(slot.DoWeContainAnItem())
@@ -18,11 +19,13 @@ public class GOSlot : MonoBehaviour {
                     BagSlot bagSlot = (BagSlot)slot;
                     
                     // stackingTxt.text = slot.GetItem().
-                    stackingTxt = GetComponentInChildren<Text>();
+                    //stackingTxt = GetComponentInChildren<Text>();
                     stackingTxt.text = bagSlot.CurrentStackCount.ToString();
                 }
             }
         }
 
     }
+
+    
 }

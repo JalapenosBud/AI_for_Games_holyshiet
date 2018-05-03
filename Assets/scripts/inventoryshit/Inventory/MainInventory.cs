@@ -39,6 +39,8 @@ public class MainInventory  : MonoBehaviour{
         ItemAssignController.CheckForArmorEnum += ItemAssignController_CheckForArmorEnum;
         ItemAssignController.RightClickToEquip += ItemAssignController_RightClickToEquip;
         ItemAssignController.Get_stacked_item_count += ItemAssignController_Get_stacked_item_count;
+
+        ItemAssignController.updateStackAmountWithTextGO += ItemAssignController_updateStackAmountWithTextGO;
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
@@ -212,6 +214,25 @@ public class MainInventory  : MonoBehaviour{
         retrieveStackAmount = thisSlot.CurrentStackCount;
     }
 
+    private void ItemAssignController_updateStackAmountWithTextGO(GOSlot endSlot)
+    {
+        if (endSlot != null)
+        {
+            //GetComponent<Image>().sprite = endSlot.GetItemSprite();
+
+            if (endSlot.slot is BagSlot)
+            {
+                BagSlot bagSlot = (BagSlot)endSlot.slot;
+
+                // stackingTxt.text = slot.GetItem().
+                //endSlot.stackingTxt = GetComponentInChildren<Text>();
+                //bagSlot.add
+                endSlot.stackingTxt.text = retrieveStackAmount.ToString();
+            }
+
+        }
+    }
+
     /// <summary>
     /// This method swaps items.
     /// </summary>
@@ -236,11 +257,11 @@ public class MainInventory  : MonoBehaviour{
 
         endDragBagSlot.AddToStackedItems(retrieveStackAmount, item);
 
-        print("slot at: " + tmpItem.SlotRefID + " has  " + retrieveStackAmount + " items");
+        print("slot at: " + tmpItem.SlotRefID + " has  " + endDragBagSlot.CurrentStackCount + " items");
 
         //remember the text component is stored IN TEH CHILD OBJECT!!!
-        allSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = retrieveStackAmount.ToString();
-        print("landing id is: " + tmpItemOtherSlot.SlotRefID + " start landing id is: " + tmpItem.SlotRefID);
+        allSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = " " + retrieveStackAmount;
+        print(tmpItemOtherSlot.SlotRefID + " has " + retrieveStackAmount);
         
         foreach (GOSlot bs in bagSlots)
         {

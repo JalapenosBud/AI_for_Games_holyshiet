@@ -14,7 +14,19 @@
     public static event PlaceItemAtID RightClickToUnequip;
     public static event PlaceItemAtID Get_stacked_item_count;
 
+    public delegate void UpdateInformation(GOSlot slot);
+    public static event UpdateInformation updateStackAmountWithTextGO;
+
     #endregion
+
+    public static void UpdateStackInfo(GOSlot slot)
+    {
+        UpdateInformation info = updateStackAmountWithTextGO;
+        if(info != null)
+        {
+            updateStackAmountWithTextGO(slot);
+        }
+    }
 
     //this gets the id that gets dragged, and makes a temp object out of it
     public static void GettingFirstIDMethod(Item item)
