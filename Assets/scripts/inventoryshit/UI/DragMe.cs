@@ -49,6 +49,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         }
 
         ItemAssignController.GettingFirstIDMethod(goSlotVar.GetComponent<GOSlot>().slot.GetItem());
+
+        ItemAssignController.Get_stacked_item_countMethod(goSlotVar.GetComponent<GOSlot>().slot);
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -67,6 +69,8 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
             Destroy(draggedObj);
         }
         var goSlotVar = eventData.pointerEnter;
+
+        
 
         //pre: NO ITEM AT SLOT
         //post: place item

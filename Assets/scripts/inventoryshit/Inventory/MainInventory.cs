@@ -6,18 +6,25 @@ using UnityEngine.UI;
 
 public class MainInventory  : MonoBehaviour{
 
+    private int retrieveStackAmount;
+
     public GameObject bagSlotsPanel;
     public GameObject charSlotsPanel;
+
     private SlotIncrementer slotIncrementer;
 
     private List<GOSlot> bagSlots;
-
     private List<GOSlot> characterSlots;
-
     public List<GOSlot> allSlots = new List<GOSlot>();
 
     private Item oldItem;
+    /// <summary>
+    /// This is the item that is getting dragged.
+    /// </summary>
     private Item tmpItem;
+    /// <summary>
+    /// Temporary item of where the mouse cursor lands.
+    /// </summary>
     private Item tmpItemOtherSlot;
 
     InventoryDatabase inventoryDatabase;
@@ -31,6 +38,7 @@ public class MainInventory  : MonoBehaviour{
         ItemAssignController.JustPlaceItemAtID += ItemAssignController_JustPlaceItemAtID;
         ItemAssignController.CheckForArmorEnum += ItemAssignController_CheckForArmorEnum;
         ItemAssignController.RightClickToEquip += ItemAssignController_RightClickToEquip;
+        ItemAssignController.Get_stacked_item_count += ItemAssignController_Get_stacked_item_count;
         //INSTANTIATE
         inventoryDatabase = new InventoryDatabase();
         slotIncrementer = new SlotIncrementer();
@@ -64,6 +72,7 @@ public class MainInventory  : MonoBehaviour{
 
         //inventoryDatabase.PrintAllClassNames();
     }
+
 
     /// <summary>
     /// This decides to place item if destination slot is empty, or swap if its not.
@@ -195,15 +204,23 @@ public class MainInventory  : MonoBehaviour{
 
     }
 
+
+    private void ItemAssignController_Get_stacked_item_count(Slot slot)
+    {
+        BagSlot thisSlot = (BagSlot)slot;
+
+        retrieveStackAmount = thisSlot.CurrentStackCount;
+    }
+
     /// <summary>
-    /// This method swap items from BAG slot to CHAR slots
+    /// This method swaps items.
     /// </summary>
     /// <param name="item">The item the mouse pointer is at.</param>
     /// <param name="slot">The slot the mouse pointer is at.</param>
     private void SwapItem(Item item, Slot slot)
     {
         var startDragBagSlot = (BagSlot)bagSlots[tmpItem.SlotRefID].slot;
-        print(startDragBagSlot.stackedItems.Count);
+        print(retrieveStackAmount);
         //if landing on a bag item, then check if the old item was in char equip
         //if it was, and the new armorType doesnt match old, return
 
@@ -217,8 +234,14 @@ public class MainInventory  : MonoBehaviour{
 
         //where it lands
         var endDragBagSlot = (BagSlot)bagSlots[tmpItemOtherSlot.SlotRefID].slot;
-        print(endDragBagSlot.stackedItems.Count);
 
+        endDragBagSlot.AddToStackedItems(startDragBagSlot.CurrentStackCount, item);
+
+        print(retrieveStackAmount);
+
+        //remember the text component is stored IN TEH CHILD OBJECT!!!
+        bagSlots[tmpItemOtherSlot.SlotRefID].GetComponentInChildren<Text>().text = startDragBagSlot.CurrentStackCount.ToString();
+        print("landing id is: " + tmpItemOtherSlot.SlotRefID + " start landing id is: " + tmpItem.SlotRefID);
         
     }
 

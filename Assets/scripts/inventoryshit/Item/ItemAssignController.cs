@@ -12,9 +12,10 @@
     public static event PlaceItemAtID CheckForArmorEnum;
     public static event PlaceItemAtID RightClickToEquip;
     public static event PlaceItemAtID RightClickToUnequip;
+    public static event PlaceItemAtID Get_stacked_item_count;
 
     #endregion
-    
+
     //this gets the id that gets dragged, and makes a temp object out of it
     public static void GettingFirstIDMethod(Item item)
     {
@@ -32,6 +33,19 @@
         if (secondID != null)
         {
             Getting_ID_FOR_SWAP(item, slot);
+        }
+    }
+
+    /// <summary>
+    /// this retrieves info about how many stacked items this slot contains
+    /// </summary>
+    /// <param name="slot"></param>
+    public static void Get_stacked_item_countMethod(Slot slot)
+    {
+        PlaceItemAtID secondID = Get_stacked_item_count;
+        if (secondID != null)
+        {
+            Get_stacked_item_count( slot);
         }
     }
 

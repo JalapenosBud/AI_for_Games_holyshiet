@@ -34,15 +34,6 @@ public class BagSlot : Slot{
 
     }
 
-    public override void UpdateItemIDAtSlot(Item item)
-    {
-        base.UpdateItemIDAtSlot(item);
-        if(item is Consumable)
-        {
-
-        }
-    }
-
     /*
      * add to stackeditems as many times as amount tells it to
      */
