@@ -2,13 +2,15 @@
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
 {
 
     public bool dragOnSurface = true;
+    private GameObject hoverObj;
     private GameObject draggedObj;
     private RectTransform draggingPlane;
     private Canvas canvas;
+    //public Text description;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -155,4 +157,54 @@ public class DragMe : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IE
         }
         
     }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        canvas = eventData.pointerEnter.GetComponentInParent<Canvas>();
+        var goSlotVar = eventData.pointerEnter;
+        //if(goSlotVar.GetComponent<GOSlot>().slot.GetItem() is Consumable)
+
+        if (!goSlotVar.GetComponent<GOSlot>().slot.DoWeContainAnItem())
+        {
+            return;
+
+        }
+
+        hoverObj = new GameObject("HoverOverObj");
+        hoverObj.transform.SetParent(canvas.transform, false);
+        
+
+        //put it in the bottom of the hieriarchy so it appears infront of other elements
+        hoverObj.transform.SetAsLastSibling();
+
+        var image = hoverObj.AddComponent<Image>();
+        hoverObj.GetComponent<Image>().raycastTarget = false;
+        if (goSlotVar != null )
+        {
+            
+            image.sprite = goSlotVar.GetComponent<GOSlot>().slot.GetItemSprite();
+            var description = new GameObject("textthing");
+            description.AddComponent<Text>();
+            description.transform.SetParent(hoverObj.transform,false);
+            //var ttext = hoverObj.AddComponent<Text>();
+            description.GetComponent<Text>().text = goSlotVar.GetComponent<GOSlot>().slot.GetItem().GetName();
+            //print("img color " + image.sprite + " item name: " + goSlotVar.gameObject.GetComponent<GOSlot>().slot.GetItem());
+
+        }
+        draggingPlane = transform as RectTransform;
+
+        var pos = (eventData.position - (Vector2)canvas.GetComponent<RectTransform>().localPosition);
+        hoverObj.GetComponent<RectTransform>().localPosition = pos;
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if(hoverObj != null)
+        {
+            Destroy(hoverObj);
+        }
+        
+    }
+
+    
 }
